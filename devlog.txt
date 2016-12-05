@@ -1,0 +1,16 @@
+Team Leave 'em on CEEN 's awesome devlog!!!
+
+===============================================================================
+hey guys (': below is required from dw:
+-- update this everytime you push a change to github! include any errors/bugs.
+-- use \n to separate devlog entries
+-- latest entries on the BOTTOM
+-- Format:
+	firstL -- TIMESTAMP\n
+eg: jonalfD -- 2016-12-04 14:32
+===============================================================================
+
+celineY -- 2016-12-05 0:45
+- Uploaded DESIGN.pdf and our awesome devlog.txt
+
+
