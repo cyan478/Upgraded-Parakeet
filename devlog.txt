@@ -13,4 +13,7 @@ eg: jonalfD -- 2016-12-04 14:32
 celineY -- 2016-12-05 0:45
 - Uploaded DESIGN.pdf and our awesome devlog.txt
 
+emmaV -- 2016-12-05 12:53
+- Started users.py to handle login and registration
+
 
