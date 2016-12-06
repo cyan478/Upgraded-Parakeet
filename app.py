@@ -7,7 +7,7 @@ app.secret_key = "deal with this later"
 @app.route("/")
 def root():
     if( 'username' in session.keys() ):
-        return redirect(url_for( 'mainpage' ))
+        return redirect(url_for( 'home' ))
     else:
         return redirect(url_for( 'login' ))
         
