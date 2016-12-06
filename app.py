@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-#from utils import authenticate
+from utils import users
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -13,40 +13,33 @@ def root():
         
 #====================================================================================== LOGIN
 @app.route("/login/")
-def login( **keyword_parameters ):
-    message = ""
-    if( 'message' in keyword_parameters):
-        message = keyword_parameters['message']
-    elif( 'message' in request.args ):
-        message = request.args.get('message')
-    return render_template('login.html', message = message)
+def login():
+    if "Username" in session:
+        return redirect(url_for('home'))
+    return render_template('login.html')
 
 #======================================================================= AUTHENTICATING LOGIN
-@app.route("/authenticate/", methods = ["POST"] )
-def authen():
-    dbData = authenticate.dbHandler( )
-    userNames = dbData['usernames']
-    passWords = dbData['passwords']
-    if request.form['account'] == 'Login':
-        val = authenticate.authenticate(request.form, userNames, passWords )
-        if val == True :
-            session['username'] = request.form['user']
-            return redirect(url_for('root'))
-        else:
-            return redirect(url_for('login', message = val))
-    elif request.form['account'] == 'Register':
-        val = authenticate.register(request.form, userNames, passWords)
-        if val == True :
-            return redirect(url_for('login', message = "Registration Successful"))
-        else:
-            return redirect(url_for('login', message = val))
-    else:
-        return redirect(url_for( 'root' ) )
+@app.route("/authenticate/", methods=['POST'])
+def authenticate():
+    pw = request.form["password"]
+    un = request.form["user"]
+    tp = request.form["account"]#login vs. register
+    
+    if tp == "Register":
+        regRet = users.register(un,"email",pw)#returns an error/success message
+        return render_template('login.html', message = regRet)
+        
+    if tp == "Login":
+        text = users.login(un,"email",pw)#error message
+        if text == "":#if no error message, succesful go back home
+            session["Username"] = un
+            return redirect(url_for('home'))
+        return render_template('login.html', message = text)
 
 #============================================================= ALL EVENTS PAGE (AKA MAIN PAGE)
 @app.route("/mainpage/")
 def home():
-    return render_template("main.html", user = session['username'])
+    return render_template("main.html") #, user = session['username'])
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 '''

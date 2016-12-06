@@ -10,7 +10,7 @@ f = "data/hangout.db"
 TEXT username, TEXT email, TEXT salt, TEXT pass, TEXT imgLink, TEXT eventIdList, TEXT types
 """
 
-def login(user, password):
+def login(user, email, password):
     db = connect(f)
     c = db.cursor()
     query = ("SELECT * FROM users WHERE username=?")
