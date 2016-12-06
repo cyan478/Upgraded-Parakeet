@@ -59,8 +59,6 @@ def regMain(user, email, password):#register helper
 def regReqs(user, email, password):      #error message generator
     if len(password) < 8 or len(password) > 32:
         return "Password must be 8-32 characters"
-    if len(user) < 8 or len(user) > 32:
-        return "Username must be 8-32 characters"
     if duplicate(user):  #checks if username already exists
         return "Username already exists"
     if " " in user or " " in password:
