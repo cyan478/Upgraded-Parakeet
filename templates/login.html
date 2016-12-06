@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+    <title> Login </title>
+  </head>
+
+  <body>
+    <h1>Login/Register Here:</h1>
+      {{ message }}
+      <br>
+      <br>
+      <form action = "/authenticate/" method = "POST">
+	     Username: <input type = "text" name = "user" required> <br> <br>
+	     Password: <input type = "password" name = "password" required> <br> <br>
+	     <input type = "submit" name="account" value= "Login">
+       <input type = "submit" name="account" value= "Register"> 
+      </form>
+  </body>
+
+</html>
