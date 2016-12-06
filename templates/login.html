@@ -1,20 +1,3 @@
-<!-- only this type of form works? why??
-  <body>
-    <h1>Login or Register!</h1>
-      {{ message }}
-      <br>
-      <br>
-      <form action = "/authenticate/" method = "POST">
-	     Username: <input type = "text" name = "user" required> <br> <br>
-	     Password: <input type = "password" name = "password" required> <br> <br>
-	     <input type = "submit" name="account" value= "Login">
-       <input type = "submit" name="account" value= "Register"> 
-      </form>
-  </body>
-
-</html>
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,117 +8,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="../static/loginstyle.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  body {
-      font: 400 15px Lato, sans-serif;
-      line-height: 1.8;
-      color: #818181;
-  }
-  h2 {
-      font-size: 24px;
-      text-transform: uppercase;
-      color: #303030;
-      font-weight: 600;
-      margin-bottom: 30px;
-  }
-  h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      color: #303030;
-      font-weight: 400;
-      margin-bottom: 30px;
-  }  
-  .jumbotron {
-      background-color: #f4511e;
-      color: #fff;
-      padding: 80px 25px;
-      font-family: Montserrat, sans-serif;
-  }
-  .container-fluid {
-      padding: 20px 50px;
-  }
-  .bg-grey {
-      background-color: #f6f6f6;
-  }
-  .logo-small {
-      color: #f4511e;
-      font-size: 50px;
-  }
-  .logo {
-      color: #f4511e;
-      font-size: 200px;
-  }
-  .item h4 {
-      font-size: 19px;
-      line-height: 1.375em;
-      font-weight: 400;
-      font-style: italic;
-      margin: 70px 0;
-  }
-  .item span {
-      font-style: normal;
-  }
-  .panel {
-      border: 1px solid #f4511e; 
-      border-radius:0 !important;
-      transition: box-shadow 0.5s;
-  }
-  .navbar {
-      margin-bottom: 0;
-      background-color: #f4511e;
-      z-index: 9999;
-      border: 0;
-      font-size: 12px !important;
-      line-height: 1.42857143 !important;
-      letter-spacing: 4px;
-      border-radius: 0;
-      font-family: Montserrat, sans-serif;
-  }
-  .navbar li a, .navbar .navbar-brand {
-      color: #fff !important;
-  }
-  .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #f4511e !important;
-      background-color: #fff !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-      color: #fff !important;
-  }
-  </style>
 </head>
 
 <body id="myPage" data-target=".navbar" data-offset="60">
-
-<!--
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand"></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Username" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-            <button type="submit" class="btn btn-success">Register</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-    -->
 
 <div class="jumbotron text-center">
   <h1>Hang Out</h1> 
@@ -160,7 +38,6 @@
     </form>
   </div>
 </div>
-
 
 <!-- Container (Services Section) -->
 <div id="services" class="container-fluid text-center">

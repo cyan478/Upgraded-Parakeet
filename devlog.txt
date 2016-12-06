@@ -31,3 +31,6 @@ celineY & nickN-- 2016-12-06 12:02
 
 elinaH -- 2016-12-06 12:03
 - Changed username requirements.
+
+celineY -- 2016-12-06 17:00
+- Started on main.html. Linked navbar.html to main.html.
