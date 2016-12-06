@@ -19,4 +19,8 @@ celineY -- 2016-12-05 10:50
 emmaV -- 2016-12-05 12:53
 - Started users.py to handle login and registration
 
+celineY -- 2016-12-06 0:50
+- Completed login.html in /templates. Bugs: the form in it doesn't work, 
+  but original form does. Can't login as of now.
+
 
