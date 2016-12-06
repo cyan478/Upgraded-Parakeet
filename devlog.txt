@@ -28,3 +28,6 @@ celineY -- 2016-12-06 0:50
 
 celineY & nickN-- 2016-12-06 12:02
 - Can login now!! 
+
+elinaH -- 2016-12-06 12:03
+- Changed username requirements.
