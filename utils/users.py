@@ -5,11 +5,9 @@ from sqlite3 import connect
 from os import urandom
 
 f = "data/hangout.db"
-db = connect(f)
-c = db.cursor()
 
 """
-TEXT username, TEXT salt, TEXT pass, TEXT imgLink, TEXT eventIdList, TEXT types
+TEXT username, TEXT email, TEXT salt, TEXT pass, TEXT imgLink, TEXT eventIdList, TEXT types
 """
 
 def login(user, password):
@@ -22,8 +20,8 @@ def login(user, password):
     #so should be at most one record (in theory)
      
     for record in sel:
-        password = sha1(password+record[1]).hexdigest()#record[1] is the salt
-        if (password==record[2]):
+        password = sha1(password+record[2]).hexdigest()#record[2] is the salt
+        if (password==record[3]):
             return ""#no error message because it will be rerouted to mainpage
         else:
             return "User login has failed. Invalid password"#error message
@@ -31,26 +29,26 @@ def login(user, password):
     db.close()
     return "Username does not exist"#error message
 
-def register(user, password):
+def register(user, email, password):
     db = connect(f)
     c = db.cursor()
     try: #does table already exist?
-        c.execute("SELECT * FROM USERS")
+        c.execute("SELECT * FROM users")
     except: #if not, this is the first user!
-        c.execute("CREATE TABLE users (user TEXT, salt TEXT, password TEXT)")
+        c.execute("CREATE TABLE users (username TEXT, email TEXT, salt TEXT, password TEXT, imgLink TEXT, eventIdList TEXT, types TEXT)")
     db.commit()
     db.close()
-    return regMain(user, password)#register helper
+    return regMain(user, email, password)#register helper
 
-def regMain(user, password):#register helper
+def regMain(user, email, password):#register helper
     db = connect(f)
     c = db.cursor()
-    reg = regReqs(user, password)
+    reg = regReqs(user, email, password)
     if reg == "": #if error message is blank then theres no problem, update database
         salt = urandom(10).encode('hex')
-        query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)")
+        query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?)")
         password = sha1(password + salt).hexdigest()
-        c.execute(query, (user, salt, password, "N/A", "N/A", "N/A"))
+        c.execute(query, (user, email, salt, password, "N/A", "N/A", "N/A"))
         db.commit()
         db.close()
         return "Account created!"
@@ -58,12 +56,12 @@ def regMain(user, password):#register helper
     db.close()
     return reg #return error message
         
-def regReqs(user, password):      #error message generator
+def regReqs(user, email, password):      #error message generator
     if len(password) < 8 or len(password) > 32:
         return "Password must be 8-32 characters"
     if len(user) < 8 or len(user) > 32:
         return "Username must be 8-32 characters"
-    if duplicate(user):          #checks if username already exists
+    if duplicate(user, email):  #checks if username already exists
         return "Username already exists"
     if " " in user or " " in password:
         return "Spaces not allowed in user or password"
@@ -71,11 +69,11 @@ def regReqs(user, password):      #error message generator
         return "Username and password must be different"
     return ""
 
-def duplicate(user):#checks if username already exists
+def duplicate(user, email):#checks if username already exists
     db = connect(f)
     c = db.cursor()
-    query = ("SELECT * FROM users WHERE username=?")
-    sel = c.execute(query, (user,))
+    query = ("SELECT * FROM users WHERE username=? or email=?")
+    sel = c.execute(query, (user,email))
     retVal = False
     for record in sel:
         retVal = True
