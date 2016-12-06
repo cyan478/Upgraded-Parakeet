@@ -8,17 +8,21 @@ f = "data/hangout.db"
 db = connect(f)
 c = db.cursor()
 
+"""
+TEXT username, TEXT salt, TEXT pass, TEXT imgLink, TEXT eventIdList, TEXT types
+"""
+
 def login(user, password):
     db = connect(f)
     c = db.cursor()
-    query = ("SELECT * FROM users WHERE user=?")
+    query = ("SELECT * FROM users WHERE username=?")
     sel = c.execute(query,(user,));
     
     #records with this username
     #so should be at most one record (in theory)
      
     for record in sel:
-        password = sha1(password+record[1]).hexdigest()##record[1] is the salt
+        password = sha1(password+record[1]).hexdigest()#record[1] is the salt
         if (password==record[2]):
             return ""#no error message because it will be rerouted to mainpage
         else:
@@ -44,16 +48,15 @@ def regMain(user, password):#register helper
     reg = regReqs(user, password)
     if reg == "": #if error message is blank then theres no problem, update database
         salt = urandom(10).encode('hex')
-        print salt
-        query = ("INSERT INTO users VALUES (?, ?, ?)")
+        query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)")
         password = sha1(password + salt).hexdigest()
-        c.execute(query, (user, salt, password))
+        c.execute(query, (user, salt, password, "N/A", "N/A", "N/A"))
         db.commit()
         db.close()
         return "Account created!"
     db.commit()
     db.close()
-    return reg#return error message
+    return reg #return error message
         
 def regReqs(user, password):      #error message generator
     if len(password) < 8 or len(password) > 32:
@@ -71,7 +74,7 @@ def regReqs(user, password):      #error message generator
 def duplicate(user):#checks if username already exists
     db = connect(f)
     c = db.cursor()
-    query = ("SELECT * FROM users WHERE user=?")
+    query = ("SELECT * FROM users WHERE username=?")
     sel = c.execute(query, (user,))
     retVal = False
     for record in sel:
