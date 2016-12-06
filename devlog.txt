@@ -25,3 +25,6 @@ elinaH -- 2016-12-05 22:09
 celineY -- 2016-12-06 0:50
 - Completed login.html in /templates. Bugs: the form in it doesn't work, 
   but original form does. Can't login as of now.
+
+celineY & nickN-- 2016-12-06 12:02
+- Can login now!! 
