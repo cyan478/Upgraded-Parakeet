@@ -11,10 +11,7 @@ def addFriend(initiator, friend):
     except:
         c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT, date INT)")
     query = "INSERT INTO friends VALUES (?, ?, ?, ?)"
-    now = datetime.datetime.now()
-    date = (now.month)*1000000 + (now.day)*10000 + now.year
-    print date
-    c.execute(query,(initiator, friend, "pending", date))
+    c.execute(query,(initiator, friend, "pending", "N/A"))
     db.commit()
     db.close()
 
@@ -23,6 +20,10 @@ def acceptReq(initiator, friend):
     c = db.cursor()
     query = "UPDATE friends SET status=? WHERE initiator=? AND friend=?"
     c.execute(query, ("accepted", initiator, friend))
+    now = datetime.datetime.now()
+    date = (now.month)*1000000 + (now.day)*10000 + now.year
+    query = "UPDATE friends SET date=? WHERE initiator=? AND friend=?"
+    c.execute(query, (date, initiator, friend))
     db.commit()
     db.close()
 
@@ -46,13 +47,30 @@ def listFriends(user):
             friends.append(record[1])
         else:
             friends.append(record[0])
-        print record[2]
     db.commit()
     db.close()
     return friends
 
+def isFriendversary(friendA, friendB):
+    db = connect(f)
+    c = db.cursor()
+    now = datetime.datetime.now()
+    date = (now.month)*100 + (now.day)
+    
+    query = "SELECT * FROM friends WHERE initiator=? AND friend=?"
+    sel = c.execute(query, (friendA, friendB))
+    for record in sel: #where record[3] = date
+        if record[3]/10000 == date:
+            return True
+    sel = c.execute(query, (friendB, friendA))
+    for record in sel:
+        if record[3]/10000 == date:
+            return True
+    return False
+        
 addFriend("elina","emma")
 acceptReq("elina", "emma")
 print listFriends("emma")
+print isFriendversary("emma", "elina")
 removeFriend("elina","emma")
 print listFriends("emma")
