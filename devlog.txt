@@ -32,5 +32,8 @@ celineY & nickN-- 2016-12-06 12:02
 elinaH -- 2016-12-06 12:03
 - Changed username requirements.
 
+emmaV & elinaH -- 2016-12-06 12:30
+- Wrote basic functionality for friendship handling
+
 celineY -- 2016-12-06 17:00
 - Started on main.html. Linked navbar.html to main.html.
