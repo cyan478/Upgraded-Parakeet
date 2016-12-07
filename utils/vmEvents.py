@@ -11,7 +11,7 @@ def openAPI():
     nonce = b64encode(sha1(urandom(20)).digest())
     stuff = {
         "Username":"onCeen",
-        "PasswordDigest": b64encode(sha256(nonce + str(now) + "87758c3cc7553fd0c6e69e5b3fca68f8").digest()), 
+        "PasswordDigest": b64encode(sha256(nonce + str(now) + "1").digest()), 
         "Nonce": nonce,
         "Created":now
     }
