@@ -49,3 +49,7 @@ nickN-- 2016-12-06 22:34
 
 celineY -- 2016-12-07 1:02
 - Made navbar prettier and more uniformed to theme
+
+emmaV & elinaH -- 2016-07-12 12:31
+- Started on TicketMaster api functions
+- Calls actually function!
