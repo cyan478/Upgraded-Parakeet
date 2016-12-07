@@ -53,3 +53,6 @@ celineY -- 2016-12-07 1:02
 emmaV & elinaH -- 2016-07-12 12:31
 - Started on TicketMaster api functions
 - Calls actually function!
+
+celineY -- 2016-12-07 13:28
+- Implemented map structure
