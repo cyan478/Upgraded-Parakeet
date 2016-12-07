@@ -56,3 +56,6 @@ emmaV & elinaH -- 2016-07-12 12:31
 
 celineY -- 2016-12-07 13:28
 - Implemented map structure
+
+emmaV -- 2016-07-12 14:50
+- Do tmStartDT()
