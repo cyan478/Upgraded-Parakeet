@@ -59,3 +59,6 @@ celineY -- 2016-12-07 13:28
 
 emmaV -- 2016-07-12 14:50
 - Do tmStartDT()
+
+emmaV -- 2016-07-12 19:55
+- Get key info about events from TM api
