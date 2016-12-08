@@ -3,8 +3,8 @@ import datetime
 import json
 
 query = ""
-apikey = "1" #DELETE BEFORE COMMITING
-url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%(apikey)
+apikey = "997UMSmG0TC6AmayjR6p4B9TTEA9HO1i" #DELETE BEFORE COMMITING
+url = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=%s"%(apikey)
 
 #returns dict with keys:
 #name of event
@@ -21,8 +21,9 @@ def tmCall():
     events = []
     for elem in j["_embedded"]["events"]:
         event = {}
+        event["venId"] = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
         event["name"] = elem["name"]
-        event["type"] = elem["type"]
+        event["type"] = elem["classifications"][0]["segment"]["name"]
         event["id"] = elem["id"]
         event["url"] = elem["url"]
         event["priceRange"] = [
@@ -30,7 +31,7 @@ def tmCall():
             elem["priceRanges"][0]["min"],
             elem["priceRanges"][0]["max"]
         ]
-        
+
         eventImgs = []
         for img in elem["images"]:
             eventImgs.append(img)
@@ -46,9 +47,9 @@ def tmCall():
     json.dumps(j)
     for event in events:
         for key in event.keys():
-            5+5
-            #print "%s\n\t"%(key) + str(event[key])
-        #print "\n"
+            #5+5
+            print "%s\n\t"%(key) + str(event[key])
+        print "\n"
     return events
 
 #===================QUERY ADDITION FXNS==================

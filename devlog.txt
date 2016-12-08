@@ -64,3 +64,7 @@ emmaV -- 2016-07-12 19:55
 - Get key info about events from TM api:
 	name, url, priceRange, note from 
 	event, images
+
+emmaV & elinaH -- 2016-07-12 12:33
+- Add venId to tmCall() ret
+- Start wundergroud.py
