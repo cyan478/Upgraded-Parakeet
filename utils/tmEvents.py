@@ -3,26 +3,41 @@ import datetime
 import json
 
 query = ""
-apikey = "997UMSmG0TC6AmayjR6p4B9TTEA9HO1i"
+apikey = "1"
 url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%(apikey)
 
 def tmCall():
     urlq = url+query
-    print urlq
     u = urllib2.urlopen(urlq)
     j = json.load(u)
+    events = []
     for elem in j["_embedded"]["events"]:
-        print "What?: %s"%(elem["name"])
-        print "More info: %s"%(elem["url"])
-        try:
-            print "Event's note: %s"%(elem["pleaseNote"])
+        event = {}
+        event["name"] = elem["name"]
+        event["url"] = elem["url"]
+        event["priceRange"] = [elem["priceRanges"][0]["currency"],elem["priceRanges"][0]["min"],elem["priceRanges"][0]["max"]]
+        event["images"]
+        try: #not every event has a pleaseNote
+            event["note"] = elem["pleaseNote"]
         except:
             pass
-        print ""
+        events.append(event)
+    u.close()
+    json.dumps(j)
+    for event in events:
+        for key in event.keys():
+            print "%s\n\t"%(key) + str(event[key])
+            #5+5
+        print "\n"
+    return events
 
 def tmKeyword(word):
     global query
     query += "&keyword=%s"%(word)
+
+def tmStateCode(stateCode):
+    global query
+    query += "&stateCode=%s"%(stateCode)
 
 def tmCode(post):
     global query
@@ -44,6 +59,7 @@ def tmStartDT(y, m, d, hr, min):
         min = "0" + str(min)
     query += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
 
+#only events starting after 2017-01-03 01:01
 tmStartDT(2017,01,03,01,01)
 tmCity("Queens")
 tmCall()
