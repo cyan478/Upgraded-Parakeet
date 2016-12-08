@@ -63,4 +63,4 @@ emmaV -- 2016-07-12 14:50
 emmaV -- 2016-07-12 19:55
 - Get key info about events from TM api:
 	name, url, priceRange, note from 
-	event, (working on images)
+	event, images
