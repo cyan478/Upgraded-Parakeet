@@ -8,6 +8,8 @@ url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%
 
 #returns dict with keys:
 #name of event
+#type of event (to be used for user specifics)
+#id of event (to be used for user specifics)
 #url of link to ticketmaster event
 #priceRange(array of [currency, min, max])
 #imgs (array of dicts (dict has ratio, url, w, h, fallback(ignore)))
@@ -20,6 +22,8 @@ def tmCall():
     for elem in j["_embedded"]["events"]:
         event = {}
         event["name"] = elem["name"]
+        event["type"] = elem["type"]
+        event["id"] = elem["id"]
         event["url"] = elem["url"]
         event["priceRange"] = [
             elem["priceRanges"][0]["currency"],
