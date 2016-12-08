@@ -3,7 +3,7 @@ import datetime
 import json
 
 query = ""
-apikey = "1"
+apikey = "1" #DELETE BEFORE COMMITING
 url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%(apikey)
 
 def tmCall():
@@ -16,19 +16,25 @@ def tmCall():
         event["name"] = elem["name"]
         event["url"] = elem["url"]
         event["priceRange"] = [elem["priceRanges"][0]["currency"],elem["priceRanges"][0]["min"],elem["priceRanges"][0]["max"]]
-        event["images"]
+        eventImgs = []
+        
+        for img in elem["images"]:
+            eventImgs.append(img)
+        event["imgs"] = eventImgs
+        
         try: #not every event has a pleaseNote
             event["note"] = elem["pleaseNote"]
         except:
             pass
         events.append(event)
+        
     u.close()
     json.dumps(j)
     for event in events:
         for key in event.keys():
-            print "%s\n\t"%(key) + str(event[key])
+            #print "%s\n\t"%(key) + str(event[key])
             #5+5
-        print "\n"
+        #print "\n"
     return events
 
 def tmKeyword(word):
