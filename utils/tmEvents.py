@@ -1,5 +1,6 @@
 import urllib2
 import datetime
+import json
 
 query = ""
 apikey = "997UMSmG0TC6AmayjR6p4B9TTEA9HO1i"
@@ -8,8 +9,16 @@ url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%
 def tmCall():
     urlq = url+query
     print urlq
-    u = urllib2.urlopen(urlq).read()
-    print u
+    u = urllib2.urlopen(urlq)
+    j = json.load(u)
+    for elem in j["_embedded"]["events"]:
+        print "What?: %s"%(elem["name"])
+        print "More info: %s"%(elem["url"])
+        try:
+            print "Event's note: %s"%(elem["pleaseNote"])
+        except:
+            pass
+        print ""
 
 def tmKeyword(word):
     global query
@@ -36,5 +45,5 @@ def tmStartDT(y, m, d, hr, min):
     query += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
 
 tmStartDT(2017,01,03,01,01)
-tmCode(89109)
+tmCity("Queens")
 tmCall()

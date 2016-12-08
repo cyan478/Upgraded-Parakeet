@@ -48,7 +48,7 @@ def regMain(user, email, password):#register helper
         salt = urandom(10).encode('hex')
         query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?)")
         password = sha1(password + salt).hexdigest()
-        c.execute(query, (user, email, salt, password, "N/A", "N/A", "N/A"))
+        c.execute(query, (user, email, salt, password, "N/A", "", ""))
         db.commit()
         db.close()
         return "Account created!"
