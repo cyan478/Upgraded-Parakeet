@@ -69,5 +69,10 @@ emmaV & elinaH -- 2016-07-12 12:33
 - Add venId to tmCall() ret
 - Start wunderground.py
 
-elinaH -- 2016-07-12 17:13
+emmaV -- 2016-08-12 21:10
+- Return venue information with tmCall()
+- Integrate apikeys.txt into tmEvents.py
+
+elinaH -- 2016-07-12 21:13
 - Added different querys to wunderground.py
+
