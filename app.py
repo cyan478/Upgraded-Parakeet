@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-from utils import users
+from utils import users, userEvents, connect
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -47,6 +47,19 @@ def home():
 def create():
     return render_template("create.html")
 '''
+
+#==================joinEvent=================
+@app.route("/joinEvent/<id>")
+def joinEvent(id):
+    userEvents.addEvent(session['username'], id)
+    return redirect( url_for('home') )
+
+#========================userProfile=======================
+@app.route("/user/<user>/")
+def userProfile(user):
+    friends = connect.listFriends(user)
+    events = userEvents.listEvents(user)
+
 #===================================================================================== LOGOUT
 @app.route("/logout/")
 def logout():

@@ -43,22 +43,3 @@ def listEvents(user):
             add['url'] = info['url']
             events.append(info)
     return events
-
-def findFriends(user):
-    db = connect(f)
-    c = db.cursor()
-    query = "SELECT * FROM users"
-    sel = c.execute(query, (user,))
-    uTypes = []
-    users = []
-    for record in sel:
-        if record[0]==user:
-            uTypes = record[6].split("-")
-        else:
-            types = record[6].split("-")
-            for type in types:
-                if type in uTypes and user not in users:
-                    users.append(record[0])
-    return users
-
-findFriends("sydney")

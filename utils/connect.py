@@ -61,16 +61,34 @@ def isFriendversary(friendA, friendB):
     sel = c.execute(query, (friendA, friendB))
     for record in sel: #where record[3] = date
         if record[3]/10000 == date:
+            db.commit()
+            db.close()
             return True
     sel = c.execute(query, (friendB, friendA))
     for record in sel:
         if record[3]/10000 == date:
+            db.commit()
+            db.close()
             return True
+    db.commit()
+    db.close()
     return False
-        
-addFriend("elina","emma")
-acceptReq("elina", "emma")
-print listFriends("emma")
-print isFriendversary("emma", "elina")
-removeFriend("elina","emma")
-print listFriends("emma")
+
+def findFriends(user):
+    db = connect(f)
+    c = db.cursor()
+    query = "SELECT * FROM users"
+    sel = c.execute(query, (user,))
+    uTypes = []
+    users = []
+    for record in sel:
+        if record[0]==user:
+            uTypes = record[6].split("-")
+        else:
+            types = record[6].split("-")
+            for type in types:
+                if type in uTypes and user not in users:
+                    users.append(record[0])
+    db.commit()
+    db.close()
+    return users
