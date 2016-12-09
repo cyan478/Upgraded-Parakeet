@@ -2,18 +2,26 @@ import urllib2
 import datetime
 import json
 
+def getKey():
+    f = open('../apikeys.txt','r').read()
+    csv = f.split('\n')
+    tm = csv[0].split(',')
+    return tm[1]
+
 query = ""
-apikey = "997UMSmG0TC6AmayjR6p4B9TTEA9HO1i" #DELETE BEFORE COMMITING
+apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=%s"%(apikey)
 
-#returns dict with keys:
-#name of event
-#type of event (to be used for user specifics)
-#id of event (to be used for user specifics)
-#url of link to ticketmaster event
-#priceRange(array of [currency, min, max])
-#imgs (array of dicts (dict has ratio, url, w, h, fallback(ignore)))
-#note (offered by the event) if one exists
+"""
+returns dict with keys:
+'name' of event
+'type' of event (to be used for user specifics)
+'id' of event (to be used for user specifics)
+'url' of link to ticketmaster event
+'priceRange' (array of [currency, min, max])
+'imgs' (array of dicts (dict has ratio, url, w, h, fallback(ignore)))
+'note' (offered by the event) if one exists
+"""
 def tmCall():
     urlq = url+query
     u = urllib2.urlopen(urlq)
@@ -21,7 +29,8 @@ def tmCall():
     events = []
     for elem in j["_embedded"]["events"]:
         event = {}
-        event["venId"] = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
+        venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
+        event["venue"] = searchVen(venId)
         event["name"] = elem["name"]
         event["type"] = elem["classifications"][0]["segment"]["name"]
         event["id"] = elem["id"]
@@ -45,12 +54,30 @@ def tmCall():
         
     u.close()
     json.dumps(j)
-    for event in events:
-        for key in event.keys():
-            #5+5
-            print "%s\n\t"%(key) + str(event[key])
-        print "\n"
     return events
+
+"""
+returns dict for each venue with keys:
+'city' = cityname (e.g Queens)
+'zip' = zipCode
+'country' = countryCode (e.g US)
+'state' = stateCode (e.g NY)
+'streetAddr' = street address (e.g 345 Chambers Street)
+"""
+def searchVen(venId):
+    link = "https://app.ticketmaster.com/discovery/v2/venues/%s.json?apikey=%s"%(venId,apikey)
+    u = urllib2.urlopen(link)
+    j = json.load(u)
+    dets = {}
+    dets["city"] = j["name"]
+    dets["zip"] = j["postalCode"]
+    dets["country"] = j["country"]["countryCode"]
+    dets["state"] = j["state"]["stateCode"]
+    dets["streetAddr"] = j["address"]["line1"]
+    u.close()
+    json.dumps(j)
+    return dets
+    
 
 #===================QUERY ADDITION FXNS==================
 def tmKeyword(word):
