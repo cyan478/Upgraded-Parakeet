@@ -61,6 +61,4 @@ def findFriends(user):
                     users.append(record[0])
     return users
 
-    return 0
-
 findFriends("sydney")
