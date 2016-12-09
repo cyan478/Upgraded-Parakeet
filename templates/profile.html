@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+  <head>
+  <title>Hang Out</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="../static/loginstyle.css" type="text/css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <style>
+      html { height: 100% }
+      body { height: 100%; background-color:#CCC }
+      #map-outer {height: 440px; padding: 20px; border: 2px solid #CCC; margin-bottom: 20px; background-color:#FFF }
+    #map-container { height: 400px }
+    @media all and (max-width: 991px) {
+    #map-outer  { height: 650px }
+    }
+    .center-block {
+      float: none !important
+    }
+    [class*="col-"] {
+      margin-bottom: 15px;
+}
+    </style>
+
+
+</head>
+
+</head>
+  
+  <body>
+  {% block content %}
+  {% include 'navbar.html' %}
+  {% endblock %}
+
+  <br>
+      
+    <!-- =============================================== HEADING -->
+    <!-- ======================================== need: {{name}} -->
+    <!-- ======================================================= -->
+    <h1><center>{{name}} Profile</center></h1> <br>
+
+    <div class = "container-fluid text-center">
+
+    insert their profile pic
+
+
+    <br><br>
+
+    <!-- ================================================ BUTTON -->
+    <!-- ================================== need: {{add_or_del}} -->
+    <!-- ======================================================= -->
+  
+    <!-- If this profile is NOT yours. Need to add if statement. -->
+    <form>
+    <!-- ADD CONTACT or DELETE CONTACT in the button on others' profiles -->
+
+
+    <input type="submit" name= "create" class="btn btn-success" value = {{add_or_del}}>
+    </form>
+    </div>
+    <br><br> 
+    <!-- =================================INFO, EVENTS, & FRIENDS-->
+    <!-- ================================== need: {{add_or_del}} -->
+    <!-- ======================================================= -->
+   <div class="container-fluid text-center">
+    <div class="row">
+    <div class="col-md-2"> Basic Info </div>
+    <div class="col-md-8"> Events attended </div>
+    <div class="col-md-2"> Friends </div>
+  </div><!-- /row -->
+  </div><!-- /container -->
+
+
+
+  </body>
+  
+  
+</html>
