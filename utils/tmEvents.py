@@ -3,7 +3,7 @@ import datetime
 import json
 
 query = ""
-apikey = "997UMSmG0TC6AmayjR6p4B9TTEA9HO1i" #DELETE BEFORE COMMITING
+apikey = "1" #DELETE BEFORE COMMITING
 url = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=%s"%(apikey)
 
 #returns dict with keys:
