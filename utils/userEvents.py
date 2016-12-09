@@ -1,7 +1,7 @@
 import tmEvents
 from sqlite3 import connect
 
-f = "data/hangout.db"
+f = "../data/hangout.db"
 
 def addEvent(user, eventid):
     db = connect(f)
@@ -12,9 +12,9 @@ def addEvent(user, eventid):
     for record in sel:
         idList = record[5]
         if (idList != ""):
-            idList += "-%s"%(eventId)
+            idList += "-%s"%(eventid)
         else:
-            idList += "%s"%(eventId)
+            idList += "%s"%(eventid)
         query = "UPDATE users SET eventIdList=? WHERE username=?"
         c.execute(query, (idList, user))
 
@@ -44,4 +44,23 @@ def listEvents(user):
             events.append(info)
     return events
 
-addEvent("grace", "G5diZfKUxmsi8")
+def findFriends(user):
+    db = connect(f)
+    c = db.cursor()
+    query = "SELECT * FROM users"
+    sel = c.execute(query, (user,))
+    uTypes = []
+    users = []
+    for record in sel:
+        if record[0]==user:
+            uTypes = record[6].split("-")
+        else:
+            types = record[6].split("-")
+            for type in types:
+                if type in uTypes and user not in users:
+                    users.append(record[0])
+    return users
+
+    return 0
+
+findFriends("sydney")

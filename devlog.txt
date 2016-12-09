@@ -79,3 +79,5 @@ emmaV -- 2016-08-12 21:10
 elinaH -- 2016-07-12 21:13
 - Added different querys to wunderground.py
 
+emmaV -- 2016-09-12 10:00
+- Write a basic findFriends fxn in userEvents
