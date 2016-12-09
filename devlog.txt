@@ -50,34 +50,38 @@ nickN-- 2016-12-06 22:34
 celineY -- 2016-12-07 1:02
 - Made navbar prettier and more uniformed to theme
 
-emmaV & elinaH -- 2016-07-12 12:31
+emmaV & elinaH -- 2016-12-07 12:31
 - Started on TicketMaster api functions
 - Calls actually function!
 
 celineY -- 2016-12-07 13:28
 - Implemented map structure
 
-emmaV -- 2016-07-12 14:50
+emmaV -- 2016-12-07 14:50
 - Do tmStartDT()
 
-emmaV -- 2016-07-12 19:55
+emmaV -- 2016-12-07 19:55
 - Get key info about events from TM api:
 	name, url, priceRange, note from 
 	event, images
 
-emmaV & elinaH -- 2016-07-12 12:33
+emmaV & elinaH -- 2016-12-07 12:33
 - Add venId to tmCall() ret
 - Start wunderground.py
 
-emmaV -- 2016-08-12 21:10
+emmaV -- 2016-12-08 21:10
 - Return venue information with tmCall()
 - Integrate apikeys.txt into tmEvents.py
 - Get specific info about events to tmEvents
 - Add this ^ to user info in userEvents.py
 - add listEvents() in userEvents.py
 
-elinaH -- 2016-07-12 21:13
+elinaH -- 2016-12-08 21:13
 - Added different querys to wunderground.py
 
-emmaV -- 2016-09-12 10:00
+
+emmaV -- 2016-12-09 10:00
 - Write a basic findFriends fxn in userEvents
+
+nickN -- 2016-12-09 12:17
+- Fixed navbar bugs :)
