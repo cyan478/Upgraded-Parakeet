@@ -1,5 +1,4 @@
 import urllib2
-import datetime
 import json
 
 def getKey():
@@ -10,8 +9,7 @@ def getKey():
 
 query = ""
 apikey = getKey()
-
-url = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=%s"%(apikey)
+url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%(apikey)
 
 """
 returns dict with keys:
@@ -69,16 +67,37 @@ def searchVen(venId):
     link = "https://app.ticketmaster.com/discovery/v2/venues/%s.json?apikey=%s"%(venId,apikey)
     u = urllib2.urlopen(link)
     j = json.load(u)
+    
     dets = {}
     dets["city"] = j["name"]
     dets["zip"] = j["postalCode"]
     dets["country"] = j["country"]["countryCode"]
     dets["state"] = j["state"]["stateCode"]
     dets["streetAddr"] = j["address"]["line1"]
+    
     u.close()
     json.dumps(j)
     return dets
-    
+
+"""
+returns dictionary of info about eventId with keys:
+'type': type of event (e.g sports)
+'name': name of event
+'url': url of ticketmaster page for event
+"""
+def eventInfo(eventId):
+    link = "https://app.ticketmaster.com/discovery/v2/events/%s.json?apikey=%s"%(eventId,apikey)
+    u = urllib2.urlopen(link)
+    j = json.load(u)
+
+    dets = {}
+    dets["type"] = j["classifications"][0]["segment"]["name"]
+    dets["name"] = j["name"]
+    dets["url"] = j["url"]
+
+    u.close()
+    json.dumps(j)
+    return dets
 
 #===================QUERY ADDITION FXNS==================
 def tmKeyword(word):
@@ -110,6 +129,7 @@ def tmStartDT(y, m, d, hr, min):
     query += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
 
 #only events starting after 2017-01-03 01:01
-tmStartDT(2017,01,03,01,01)
-tmCity("Queens")
-tmCall()
+#tmStartDT(2017,01,03,01,01)
+#tmCity("Queens")
+#tmCall()
+
