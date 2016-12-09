@@ -28,4 +28,20 @@ def addEvent(user, eventid):
     db.commit()
     db.close()
 
+def listEvents(user):
+    db = connect(f)
+    c = db.cursor()
+    query = "SELECT * FROM users WHERE username=?"
+    sel = c.execute(query, (user,))
+    events = []
+    for record in sel:
+        userEvs = sel[5].split("-")
+        for ev in userEvs:
+            info = tmEvents.eventInfo(ev)
+            add = {}
+            add['name'] = info['name']
+            add['url'] = info['url']
+            events.append(info)
+    return events
+
 addEvent("grace", "G5diZfKUxmsi8")
