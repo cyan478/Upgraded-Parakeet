@@ -77,13 +77,21 @@ def isFriendversary(friendA, friendB):
 def findFriends(user):
     db = connect(f)
     c = db.cursor()
+
+    #get user types
+    query = "SELECT * FROM users WHERE username=?"
+    c.execute(query, (user,))
+    uTypes = []
+    for record in sel:
+        uTypes = record[6].split("-")
+
+    #get other ppls types
     query = "SELECT * FROM users"
     sel = c.execute(query, (user,))
-    uTypes = []
     users = []
     for record in sel:
-        if record[0]==user:
-            uTypes = record[6].split("-")
+        if record[0] == user:
+            pass
         else:
             types = record[6].split("-")
             for type in types:
