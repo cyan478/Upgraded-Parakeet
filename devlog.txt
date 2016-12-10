@@ -85,3 +85,6 @@ emmaV -- 2016-12-09 10:00
 
 nickN -- 2016-12-09 12:17
 - Fixed navbar bugs :)
+
+emmaV -- 2016-12-10
+- Fix findFriends fxn
