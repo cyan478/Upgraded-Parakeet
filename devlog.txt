@@ -88,3 +88,9 @@ nickN -- 2016-12-09 12:17
 
 emmaV -- 2016-12-10
 - Fix findFriends fxn
+
+elinaH -- 2016-12-10 23:20
+- Worked on getting weather for later dates
+
+elinaH -- 2016-12-11 12:46
+- Implemented getting weather for date of event
