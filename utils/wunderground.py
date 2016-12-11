@@ -1,6 +1,12 @@
 import urllib2, json, datetime
 
-APIkey = "1"
+def getKey():
+    f = open('../apikeys.txt','r').read()
+    csv = f.split('\n')
+    wu = csv[1].split(',')
+    return wu[1]
+
+APIkey = getKey()
 url = "http://api.wunderground.com/api/%s/" % (APIkey)
 query = "geolookup/conditions/forecast10day/q/"
 
