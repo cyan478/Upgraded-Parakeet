@@ -94,3 +94,7 @@ elinaH -- 2016-12-10 23:20
 
 elinaH -- 2016-12-11 12:46
 - Implemented getting weather for date of event
+
+elinaH -- 2016-12-10 13:00
+- Implemented apikeys.txt into wunderground.py
+- Made restriction so that weather can only be given within 10 days of the event

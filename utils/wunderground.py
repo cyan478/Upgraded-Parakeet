@@ -11,12 +11,14 @@ url = "http://api.wunderground.com/api/%s/" % (APIkey)
 query = "geolookup/conditions/forecast10day/q/"
 
 def wuCall(dateOfEvent):
+	currDate = datetime.datetime.now().day
+	if (dateOfEvent - currDate >= 10):
+		return "The event is still too far away. Come back later, please!"
 	u = urllib2.urlopen(url+query)
 	json_string = u.read()
 	parsed_json = json.loads(json_string) 
 	location = parsed_json['location']['city']
 	retStr = "In %s, \n " % (location)
-	currDate = datetime.datetime.now().day
 	if (dateOfEvent - currDate == 0):
 		temp_f = parsed_json['current_observation']['temp_f']
 		weather = parsed_json['current_observation']['weather']
