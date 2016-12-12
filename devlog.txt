@@ -102,3 +102,6 @@ elinaH -- 2016-12-11 13:00
 celineY -- 2016-12-11 19:37
 - Remodified text on login.html
 
+celineY -- 2016-12-11 22:45
+- Added checkboxes option, will need to work on collapsing
+- Chenged map set to Stuy's location

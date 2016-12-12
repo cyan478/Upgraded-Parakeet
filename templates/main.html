@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <html>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
   <head>
@@ -26,7 +26,12 @@
     }
     [class*="col-"] {
       margin-bottom: 15px;
-}
+	}
+	.colored-containers{
+		background-color: #ee9d84;
+		border-radius: 5px;
+	}
+
     </style>
 
 
@@ -43,9 +48,29 @@
     <h1><center>All Events Near You</center></h1>
    <div class="container">
   <div class="row">
-    <div class="col-md-2"> set a container </div>
+
+
+    <div class="col-md-2 colored-containers"><br>	
+    	<div class = "text-center"><h4>Filter Events</h4></div>
+    	<div class="checkbox">
+  			<label><input type="checkbox" value="">Option 1</label>
+		</div>
+		<div class="checkbox">
+  			<label><input type="checkbox" value="">Option 2</label>
+		</div>
+
+    </div>
+
+
+
     <div id="map-container" class="col-md-8"></div>
-    <div class="col-md-2"> set a container </div>
+
+
+
+    <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
+    	<div class = "text-center"><h4>Friends Attending</h4></div><br>
+    	</div>
+
 </div><!-- /row -->
 </div><!-- /container -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -56,16 +81,16 @@
     <script>  
   
       function init_map() {
-    var myLocation = new google.maps.LatLng(45.430817,12.331516);
+    var myLocation = new google.maps.LatLng(40.717984,-74.013871);
       
         var mapOptions = {
           center: myLocation,
-          zoom: 14
+          zoom: 16
         };
     
     var marker = new google.maps.Marker({
       position: myLocation,
-      title:"Peggy Guggenheim Collection"});
+      title:"Stuyvesant High School"});
       
         var map = new google.maps.Map(document.getElementById("map-container"),
             mapOptions);
@@ -78,10 +103,11 @@
     
     </script>
 
-    <div class="container-fluid text-center">
+    <div class="colored-containers col-lg-6 text-center" style="float: none;
+    margin: 0 auto;">
     Name:
-    <br>
-    Date:
+    <br>Date:
+    <br>Weather:
     </div>
 
     <br>
