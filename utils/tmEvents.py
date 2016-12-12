@@ -2,14 +2,14 @@ import urllib2
 import json
 
 def getKey():
-    f = open('../apikeys.txt','r').read()
+    f = open('apikeys.txt','r').read()
     csv = f.split('\n')
     tm = csv[0].split(',')
     return tm[1]
 
-query = ""
+query = "&size=20&sort=eventDate,date.desc"
 apikey = getKey()
-url = "https://app.ticketmaster.com/discovery/v2/events.json?size=20&apikey=%s"%(apikey)
+url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
 """
 returns dict with keys:

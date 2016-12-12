@@ -1,7 +1,7 @@
 import tmEvents
 from sqlite3 import connect
 
-f = "../data/hangout.db"
+f = "data/hangout.db"
 
 def addEvent(user, eventid):
     db = connect(f)

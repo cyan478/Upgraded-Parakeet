@@ -14,7 +14,7 @@ def root():
 #====================================================================================== LOGIN
 @app.route("/login/")
 def login():
-    if "Username" in session:
+    if "username" in session:
         return redirect(url_for('home'))
     return render_template('login.html')
 
@@ -32,7 +32,7 @@ def authenticate():
     if tp == "Login":
         text = users.login(un,"email",pw)#error message
         if text == "":#if no error message, succesful go back home
-            session["Username"] = un
+            session["username"] = un
             return redirect(url_for('home'))
         return render_template('login.html', message = text)
 
