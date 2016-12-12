@@ -90,6 +90,7 @@ def updateImgLink(user,link):
     db.commit()
     db.close()
 
+    """
 def changePass(user,oldPss,newPass):
     db = connect(f)
     c = db.cursor
@@ -97,3 +98,4 @@ def changePass(user,oldPss,newPass):
     sel = c.execute(query, (user,))
     for record in sel:
         if oldPass = 
+"""
