@@ -78,3 +78,14 @@ def duplicate(user):#checks if username already exists
     db.commit()
     db.close()
     return retVal
+
+def updateImgLink(user,link):
+    db = connect(f)
+    c = db.cursor()
+    query = "SELECT * FROM users WHERE username=?"
+    sel = c.execute(query, (user,))
+    for record in sel:
+        query = "UPDATE users SET imgLink=? WHERE username=?"
+        c.execute(query, (link, user))
+    db.commit()
+    db.close()
