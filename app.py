@@ -59,7 +59,7 @@ def joinEvent(id):
 def userProfile(user):
     friends = connect.listFriends(user)
     events = userEvents.listEvents(user)
-    return render_template("profile.html", session['username'])
+    return render_template("profile.html", username = session['username'])
 
 #===================================================================================== LOGOUT
 @app.route("/logout/")
