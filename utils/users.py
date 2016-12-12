@@ -89,3 +89,11 @@ def updateImgLink(user,link):
         c.execute(query, (link, user))
     db.commit()
     db.close()
+
+def changePass(user,oldPss,newPass):
+    db = connect(f)
+    c = db.cursor
+    query = "SELECT * FROM users WHERE username=?"
+    sel = c.execute(query, (user,))
+    for record in sel:
+        if oldPass = 
