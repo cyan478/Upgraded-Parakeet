@@ -116,9 +116,11 @@
 
       HELLO BELOW IS JUST TESTING FOR THE DICTIONARY THANG.
 
-      {% for key, value in events %}
+      {% for event in events %}
+        {% for key, value in event.iterkeys %}
             <dt>{{ key }}</dt>
             <dd>{{ value }}</dd>
+        {% endfor %}
       {% endfor %}
 
     </div> <!-- colored container -->
