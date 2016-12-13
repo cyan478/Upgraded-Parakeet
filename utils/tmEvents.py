@@ -34,12 +34,10 @@ def tmCall():
                 event["type"] = elem["classifications"][0]["segment"]["name"]
             except:
                 event["type"] = "N/A"
-            print "THING: " + str(elem.keys())
             try:
                 venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
                 event["venue"] = searchVen(venId)
             except:
-                print "Venue"
                 toAppend = False;
             try:
                 event["name"] = elem["name"]
@@ -68,7 +66,6 @@ def tmCall():
                 event["note"] = elem["pleaseNote"]
             except:
                 pass
-            print toAppend
             if toAppend:
                 events.append(event)
         
