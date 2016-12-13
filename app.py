@@ -27,11 +27,11 @@ def authenticate():
     tp = request.form["account"]#login vs. register
     
     if tp == "Register":
-        regRet = users.register(un,email,pw)#returns an error/success message
+        regRet = users.register(un,em,pw)#returns an error/success message
         return render_template('login.html', message = regRet)
         
     if tp == "Login":
-        text = users.login(un,email,pw)#error message
+        text = users.login(un,em,pw)#error message
         if text == "":#if no error message, succesful go back home
             session["username"] = un
             return redirect(url_for('home'))
