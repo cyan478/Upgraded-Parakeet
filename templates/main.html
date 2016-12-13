@@ -26,11 +26,12 @@
     }
     [class*="col-"] {
       margin-bottom: 15px;
-	}
-	.colored-containers{
-		background-color: #ee9d84;
-		border-radius: 5px;
-	}
+  }
+  .colored-containers{
+    background-color: #ee9d84;
+    border-radius: 5px;
+  }
+
 
     </style>
 
@@ -49,28 +50,54 @@
    <div class="container">
   <div class="row">
 
-
-    <div class="col-md-2 colored-containers"><br>	
-    	<div class = "text-center"><h4>Filter Events</h4></div>
+  <!-- ============================================================== /FILTER/ -->
+    <div class="col-md-2 colored-containers"><br> 
+      <div class = "text-center"><h4>Filter Events</h4></div>
+      <!--
       Price Range
-    	<div class="checkbox">
-  			<label><input type="checkbox" value="">Free</label>
-		</div>
-		<div class="checkbox">
-  			<label><input type="checkbox" value="">Up to $5</label></div>
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Free</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" value="">Up to $5</label></div>
     <div class="checkbox">
         <label><input type="checkbox" value="">Up to $10</label></div>
     <div class="checkbox">
         <label><input type="checkbox" value="">Up to $20</label></div>
     <div class="checkbox">
         <label><input type="checkbox" value="">More than $20</label></div>
-      keyword
-      state
-      postal code
-      city
-      starts after
-    </div>
+        -->
+        
+       <!-- class form action -> function (ex: filter()) apply - submit button -->
+     <form action = "/filter/" method = "POST">
+        <div class="form-group">
+          <label for="keyword">Keyword</label>
+          <input type="text" class="form-control" placeholder="Keyword">
+        </div>
+        <div class="form-group">
+          <label for="keyword">Postal Code</label>
+          <input type="text" class="form-control" placeholder="Postal Code">
+        </div>
+        <div class="form-group">
+          <label for="keyword">City</label>
+          <input type="text" class="form-control" placeholder="City">
+        </div>
+        <b>Date Range</b>
+        <div class="checkbox">
+              <label><input type="radio" value=""> Starts today</label>
+        </div>
+        <div class="checkbox">
+              <label><input type="radio" value=""> Starts a week from today</label>
+        </div>
+        <div class="checkbox">
+              <label><input type="radio" value=""> Starts two weeks from today</label>
+        </div>
+        <center><input type="submit" name = "filter" class="btn btn-success" value = "Apply"></center>
+    </form>
+  <br>
 
+  </div>
+  <!-- ============================================================ END /FILTER/ -->
 
 
     <div id="map-container" class="col-md-8"></div>
@@ -78,8 +105,8 @@
 
 
     <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
-    	<div class = "text-center"><h4>Friends Attending</h4></div><br>
-    	</div>
+      <div class = "text-center"><h4>Listed Events</h4></div><br>
+      </div>
 
 </div><!-- /row -->
 </div><!-- /container -->
@@ -127,9 +154,9 @@
     <input type="submit" name= "create" class="btn btn-success" value = "Invite friends">
     <input type="submit" name = "account" class="btn btn-success" value = "Search for directions">
     </form>
-  	</div>
+    </div>
 
-	<div class="container-fluid">
+  <div class="container-fluid">
     <h3>Photos of Event</h3>
     insert photo
     </div>
