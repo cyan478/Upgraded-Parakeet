@@ -107,7 +107,10 @@ def eventInfo(eventId):
     if eventId != "N/A":
         link = "https://app.ticketmaster.com/discovery/v2/events/%s.json?apikey=%s"%(eventId,apikey)
         print link
-        u = urllib2.urlopen(link)
+        try:
+            u = urllib2.urlopen(link)
+        except:
+            return {}
         j = json.load(u)
 
         dets = {}
@@ -119,7 +122,7 @@ def eventInfo(eventId):
         json.dumps(j)
         return dets
     else:
-        return "N/A"
+        return {}
 
 #===================QUERY ADDITION FXNS==================
 def tmKeyword(word):

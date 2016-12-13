@@ -38,7 +38,7 @@ def listEvents(user):
         userEvs = record[5].split("-")
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
-            if info!="N/A":
+            if info!="N/A" and info != {}:
                 add = {}
                 add['name'] = info['name']
                 add['url'] = info['url']
