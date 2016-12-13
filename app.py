@@ -40,7 +40,7 @@ def authenticate():
 #============================================================= ALL EVENTS PAGE (AKA MAIN PAGE)
 @app.route("/mainpage/")
 def home():
-    return render_template("main.html") #, user = session['username'])
+    return render_template("main.html", user = session['username'])
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 '''
