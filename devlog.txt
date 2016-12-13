@@ -109,3 +109,6 @@ celineY -- 2016-12-11 22:45
 emmaV & elinaH -- 2016-12-12 12:30
 - Fixed app.py username stuff
 - Started possible change pass option
+
+celineY -- 2016-12-12 12:40
+- Added filtering forms in main.html (radio, text forms,)
