@@ -46,11 +46,13 @@
   <br>
       
       
-    <h1><center>All Events Near You</center></h1>
+  <h1><center>All Events Near You</center></h1>
    <div class="container">
   <div class="row">
 
+  <!-- ========================================================================--> 
   <!-- ============================================================== /FILTER/ -->
+  <!-- ========================================================================--> 
     <div class="col-md-2 colored-containers"><br> 
       <div class = "text-center"><h4>Filter Events</h4></div>
       <!--
@@ -97,19 +99,42 @@
   <br>
 
   </div>
-  <!-- ============================================================ END /FILTER/ -->
+  <!-- ========================================================================--> 
+  <!-- ========================================================== END /FILTER/ -->
+  <!-- ========================================================================--> 
 
-
+  <!-- celine's note to self: should render markers based on locations of events. -->
     <div id="map-container" class="col-md-8"></div>
 
-
-
+  <!-- ========================================================================--> 
+  <!-- ========================================================= LISTING EVENTS--> 
+  <!-- ================================================ dict is called events? --> 
+  <!-- ========================================================================--> 
     <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
       <div class = "text-center"><h4>Listed Events</h4></div><br>
-      </div>
+
+
+      HELLO BELOW IS JUST TESTING FOR THE DICTIONARY THANG.
+
+      {% for key, value in events %}
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+      {% endfor %}
+
+    </div> <!-- colored container -->
+
+
+
+
+
+
+
 
 </div><!-- /row -->
 </div><!-- /container -->
+
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
