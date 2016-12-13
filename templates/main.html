@@ -117,7 +117,7 @@
       HELLO BELOW IS JUST TESTING FOR THE DICTIONARY THANG.
 
       {% for event in events %}
-        {% for key, value in event.iterkeys %}
+        {% for key, value in _event.iterkeys() %}
             <dt>{{ key }}</dt>
             <dd>{{ value }}</dd>
         {% endfor %}
