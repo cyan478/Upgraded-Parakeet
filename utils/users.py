@@ -90,12 +90,18 @@ def updateImgLink(user,link):
     db.commit()
     db.close()
 
-    """
 def changePass(user,oldPss,newPass):
     db = connect(f)
     c = db.cursor
     query = "SELECT * FROM users WHERE username=?"
     sel = c.execute(query, (user,))
     for record in sel:
-        if oldPass = 
-"""
+        if sha1(oldPass+record[2]).hexdigest() == record[3]:
+					query = "UPDATE users SET pass=? WHERE usernamen=?"
+					c.execute(query, (sha1(newPass+record[2]).hexdigest(), user))
+					return "Password was changed successfully"
+				else:
+					return "Incorrect password entered"
+		db.commit()
+		db.close()
+		return "Username does not exist"
