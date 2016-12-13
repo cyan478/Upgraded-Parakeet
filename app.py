@@ -58,9 +58,11 @@ def joinEvent(id):
 #========================userProfile=======================
 @app.route("/user/<user>/")
 def userProfile(user):
-    friends = connect.listFriends(user)
-    events = userEvents.listEvents(user)
-    return render_template("profile.html", username = session['username'])
+    friendsDict = connect.listFriends(user)
+    eventsDict = userEvents.listEvents(user)
+    eventsDict.append({'testName': 'name!'})
+    print eventsDict
+    return render_template("profile.html", username = session['username'], events=eventsDict)
 
 #===================================================================================== LOGOUT
 @app.route("/logout/")
