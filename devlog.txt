@@ -105,3 +105,7 @@ celineY -- 2016-12-11 19:37
 celineY -- 2016-12-11 22:45
 - Added checkboxes option, will need to work on collapsing
 - Chenged map set to Stuy's location
+
+emmaV & elinaH -- 2016-12-12 12:30
+- Fixed app.py username stuff
+- Started possible change pass option
