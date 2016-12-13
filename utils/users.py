@@ -59,19 +59,19 @@ def regMain(user, email, password):#register helper
 def regReqs(user, email, password):      #error message generator
     if len(password) < 8 or len(password) > 32:
         return "Password must be 8-32 characters"
-    if duplicate(user):  #checks if username already exists
-        return "Username already exists"
+    if duplicate(user,email):  #checks if username already exists
+        return "Username or email already exists"
     if " " in user or " " in password:
         return "Spaces not allowed in user or password"
     if user==password:
         return "Username and password must be different"
     return ""
 
-def duplicate(user):#checks if username already exists
+def duplicate(user,email):#checks if username already exists
     db = connect(f)
     c = db.cursor()
-    query = ("SELECT * FROM users WHERE username=?")
-    sel = c.execute(query, (user,))
+    query = ("SELECT * FROM users WHERE username=? OR email=?")
+    sel = c.execute(query, (user,email))
     retVal = False
     for record in sel:
         retVal = True
