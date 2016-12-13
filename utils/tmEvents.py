@@ -7,7 +7,7 @@ def getKey():
     tm = csv[0].split(',')
     return tm[1]
 
-query = "&size=20"
+query = "&size=10"
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -22,38 +22,55 @@ returns dict with keys:
 'note' (offered by the event) if one exists
 """
 def tmCall():
+    toAppend = True
     urlq = url+query
     u = urllib2.urlopen(urlq)
     j = json.load(u)
     events = []
     for elem in j["_embedded"]["events"]:
-        event = {}
-        venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
-        event["venue"] = searchVen(venId)
-        event["name"] = elem["name"]
-        print elem.keys()
-        try:
-            event["type"] = elem["classifications"][0]["segment"]["name"]
-        except:
-            continue
-        event["id"] = elem["id"]
-        event["url"] = elem["url"]
-        event["priceRange"] = [
-            elem["priceRanges"][0]["currency"],
-            elem["priceRanges"][0]["min"],
-            elem["priceRanges"][0]["max"]
-        ]
+        if elem["name"] != "No Longer on Sale for Web":
+            event = {}
+            try:
+                event["type"] = elem["classifications"][0]["segment"]["name"]
+            except:
+                event["type"] = "N/A"
+            print "THING: " + str(elem.keys())
+            try:
+                venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
+                event["venue"] = searchVen(venId)
+            except:
+                print "Venue"
+                toAppend = False;
+            try:
+                event["name"] = elem["name"]
+            except:
+                toAppend = False;
+            event["id"] = elem["id"]
+            event["url"] = elem["url"]
+            try:
+                event["priceRange"] = [
+                    elem["priceRanges"][0]["currency"],
+                    elem["priceRanges"][0]["min"],
+                    elem["priceRanges"][0]["max"]
+                ]
+            except:
+                event["priceRange"] = ["N/A","N/A","N/A"]
 
-        eventImgs = []
-        for img in elem["images"]:
-            eventImgs.append(img)
-        event["imgs"] = eventImgs
+            eventImgs = []
+            try:
+                for img in elem["images"]:
+                    eventImgs.append(img)
+                    event["imgs"] = eventImgs
+            except:
+                pass
         
-        try: #not every event has a pleaseNote
-            event["note"] = elem["pleaseNote"]
-        except:
-            continue
-        events.append(event)
+            try: #not every event has a pleaseNote
+                event["note"] = elem["pleaseNote"]
+            except:
+                pass
+            print toAppend
+            if toAppend:
+                events.append(event)
         
     u.close()
     json.dumps(j)
@@ -138,6 +155,6 @@ def tmStartDT(y, m, d, hr, min):
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)
-#tmCity("Queens")
+tmCity("Queens")
 #tmCall()
 

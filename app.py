@@ -41,15 +41,13 @@ def authenticate():
 @app.route("/mainpage/")
 def home():
     eventsArr = tmEvents.tmCall()
-    print eventsArr
+    #print eventsArr
     return render_template("main.html", user = session['username'], events=eventsArr)
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
-'''
-@app.route("/create/")
-def create():
-    return render_template("create.html")
-'''
+#@app.route("/filter/")
+#def filter():
+    
 
 #==================joinEvent=================
 @app.route("/joinEvent/<id>")
