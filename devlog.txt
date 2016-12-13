@@ -113,3 +113,7 @@ emmaV & elinaH -- 2016-12-12 12:30
 
 celineY -- 2016-12-12 12:40
 - Added filtering forms in main.html (radio, text forms,)
+
+elinaH -- 2016-12-12 21:30
+- Finished the changePass function
+- Added .gitignore so we don't accidentally push API keys and no more .pyc files
