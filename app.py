@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-from utils import users, userEvents, connect
+from utils import users, userEvents, connect, tmEvents
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -40,7 +40,9 @@ def authenticate():
 #============================================================= ALL EVENTS PAGE (AKA MAIN PAGE)
 @app.route("/mainpage/")
 def home():
-    return render_template("main.html", user = session['username'])
+    eventsArr = tmEvents.tmCall()
+    print eventsArr
+    return render_template("main.html", user = session['username'], events=eventsArr)
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 '''

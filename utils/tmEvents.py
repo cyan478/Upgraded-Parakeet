@@ -7,7 +7,7 @@ def getKey():
     tm = csv[0].split(',')
     return tm[1]
 
-query = "&size=20&sort=eventDate,date.desc"
+query = "&size=20"
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -31,7 +31,11 @@ def tmCall():
         venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
         event["venue"] = searchVen(venId)
         event["name"] = elem["name"]
-        event["type"] = elem["classifications"][0]["segment"]["name"]
+        print elem.keys()
+        try:
+            event["type"] = elem["classifications"][0]["segment"]["name"]
+        except:
+            continue
         event["id"] = elem["id"]
         event["url"] = elem["url"]
         event["priceRange"] = [
@@ -48,7 +52,7 @@ def tmCall():
         try: #not every event has a pleaseNote
             event["note"] = elem["pleaseNote"]
         except:
-            pass
+            continue
         events.append(event)
         
     u.close()

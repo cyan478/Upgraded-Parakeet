@@ -97,11 +97,11 @@ def changePass(user,oldPss,newPass):
     sel = c.execute(query, (user,))
     for record in sel:
         if sha1(oldPass+record[2]).hexdigest() == record[3]:
-					query = "UPDATE users SET pass=? WHERE usernamen=?"
-					c.execute(query, (sha1(newPass+record[2]).hexdigest(), user))
-					return "Password was changed successfully"
-				else:
-					return "Incorrect password entered"
-		db.commit()
-		db.close()
-		return "Username does not exist"
+	    query = "UPDATE users SET pass=? WHERE usernamen=?"
+	    c.execute(query, (sha1(newPass+record[2]).hexdigest(), user))
+	    return "Password was changed successfully"
+	else:
+	    return "Incorrect password entered"
+    db.commit()
+    db.close()
+    return "Username does not exist"
