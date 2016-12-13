@@ -86,18 +86,22 @@ returns dictionary of info about eventId with keys:
 'url': url of ticketmaster page for event
 """
 def eventInfo(eventId):
-    link = "https://app.ticketmaster.com/discovery/v2/events/%s.json?apikey=%s"%(eventId,apikey)
-    u = urllib2.urlopen(link)
-    j = json.load(u)
+    if eventId != "N/A":
+        link = "https://app.ticketmaster.com/discovery/v2/events/%s.json?apikey=%s"%(eventId,apikey)
+        print link
+        u = urllib2.urlopen(link)
+        j = json.load(u)
 
-    dets = {}
-    dets["type"] = j["classifications"][0]["segment"]["name"]
-    dets["name"] = j["name"]
-    dets["url"] = j["url"]
+        dets = {}
+        dets["type"] = j["classifications"][0]["segment"]["name"]
+        dets["name"] = j["name"]
+        dets["url"] = j["url"]
 
-    u.close()
-    json.dumps(j)
-    return dets
+        u.close()
+        json.dumps(j)
+        return dets
+    else:
+        return "N/A"
 
 #===================QUERY ADDITION FXNS==================
 def tmKeyword(word):

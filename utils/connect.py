@@ -1,7 +1,7 @@
 from sqlite3 import connect
 import datetime
 
-f = "../data/hangout.db"
+f = "data/hangout.db"
 
 def addFriend(initiator, friend):
     db = connect(f)

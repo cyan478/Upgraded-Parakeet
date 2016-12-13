@@ -35,11 +35,12 @@ def listEvents(user):
     sel = c.execute(query, (user,))
     events = []
     for record in sel:
-        userEvs = sel[5].split("-")
+        userEvs = record[5].split("-")
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
-            add = {}
-            add['name'] = info['name']
-            add['url'] = info['url']
-            events.append(info)
+            if info!="N/A":
+                add = {}
+                add['name'] = info['name']
+                add['url'] = info['url']
+                events.append(info)
     return events
