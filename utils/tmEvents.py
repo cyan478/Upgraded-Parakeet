@@ -7,7 +7,7 @@ def getKey():
     tm = csv[0].split(',')
     return tm[1]
 
-query = "&size=20"
+query = "&size=10"
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -30,50 +30,9 @@ def tmCall():
     events = []
     for elem in j["_embedded"]["events"]:
         if elem["name"] != "No Longer on Sale for Web":
-            event = {}
-            try:
-                event["type"] = elem["classifications"][0]["segment"]["name"]
-            except:
-                event["type"] = "N/A"
-            try:
-                venId = elem["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
-                event["venue"] = searchVen(venId)
-            except:
-                toAppend = False;
-            try:
-                event["name"] = elem["name"]
-            except:
-                toAppend = False;
-            event["id"] = elem["id"]
-            event["url"] = elem["url"]
-            try:
-                event["priceRange"] = [
-                    elem["priceRanges"][0]["currency"],
-                    elem["priceRanges"][0]["min"],
-                    elem["priceRanges"][0]["max"]
-                ]
-            except:
-                event["priceRange"] = ["N/A","N/A","N/A"]
-
-            eventImgs = []
-            try:
-                for img in elem["images"]:
-                    eventImgs.append(img)
-                    event["imgs"] = eventImgs
-            except:
-                pass
-        
-            try: #not every event has a pleaseNote
-                event["note"] = elem["pleaseNote"]
-            except:
-                pass
-            try:
-                event["latitude"] = elem["_embedded"]["venues"][0]["location"]["latitude"]
-                event["longitude"] = elem["_embedded"]["venues"][0]["location"]["longitude"]
-            except:
-                toAppend = False
-            if toAppend:
-                events.append(event)
+            info = eventInfo(elem["id"])
+            if info != {}:
+                events.append(info)
         
     u.close()
     json.dumps(j)
@@ -120,17 +79,40 @@ def eventInfo(eventId):
         j = json.load(u)
 
         dets = {}
-        dets["type"] = j["classifications"][0]["segment"]["name"]
+        #try:
         dets["name"] = j["name"]
         dets["url"] = j["url"]
-        dets["latitude"] = j["_embedded"]["venue"][0]["location"]["latitude"]
-        dets["longitude"] = j["_embedded"]["venue"][0]["location"]["longitude"]
+        dets["latitude"] = j["_embedded"]["venues"][0]["location"]["latitude"]
+        dets["longitude"] = j["_embedded"]["venues"][0]["location"]["longitude"]
+        venId = j["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
+        dets["venue"] = searchVen(venId)
+        #except:
+         #   return {}
+
+        dets["type"] = j["classifications"][0]["segment"]["name"]
+        eventImgs = []
+        try: #not every event has a pleaseNote
+            event["note"] = elem["pleaseNote"]
+        except:
+            pass
+        try:
+            for img in elem["images"]:
+                eventImgs.append(img)
+                event["imgs"] = eventImgs
+        except:
+            pass
+        try:
+            dets["priceRange"] = [
+                j["priceRanges"][0]["currency"],
+                j["priceRanges"][0]["min"],
+                j["priceRanges"][0]["max"]
+            ]
+        except:
+            dets["priceRange"] = ["N/A","N/A","N/A"]
         
         u.close()
         json.dumps(j)
         return dets
-    else:
-        return {}
 
 #===================QUERY ADDITION FXNS==================
 def tmKeyword(word):
@@ -163,6 +145,6 @@ def tmStartDT(y, m, d, hr, min):
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)
-#tmCity("Queens")
+tmCity("Queens")
 tmCall()
 
