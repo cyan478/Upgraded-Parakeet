@@ -10,9 +10,10 @@ APIkey = getKey()
 url = "http://api.wunderground.com/api/%s/" % (APIkey)
 query = "geolookup/conditions/forecast10day/q/"
 
-def wuCall(dateOfEvent):
+def wuCall(dateOfEvent, monthOfEvent):
 	currDate = datetime.datetime.now().day
-	if (dateOfEvent - currDate >= 10):
+	currMonth = datetime.datetime.now().month
+	if (monthOfEvent != currMonth or dateOfEvent - currDate >= 10):
 		return "The event is still too far away. Come back later, please!"
 	u = urllib2.urlopen(url+query)
 	json_string = u.read()
@@ -45,4 +46,4 @@ def zipcode(zip):
 
 location("NY", "Brooklyn")	
 #zipcode("90210")
-print wuCall(11)
+print wuCall(15,1)
