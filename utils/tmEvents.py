@@ -66,6 +66,8 @@ def tmCall():
                 event["note"] = elem["pleaseNote"]
             except:
                 pass
+            event["latitude"] = elem["_embedded"]["venues"][0]["location"]["latitude"]
+            event["longitude"] = elem["_embedded"]["venues"][0]["location"]["longitude"]
             if toAppend:
                 events.append(event)
         
@@ -117,7 +119,9 @@ def eventInfo(eventId):
         dets["type"] = j["classifications"][0]["segment"]["name"]
         dets["name"] = j["name"]
         dets["url"] = j["url"]
-
+        dets["latitude"] = j["_embedded"]["venue"][0]["location"]["latitude"]
+        dets["longitude"] = j["_embedded"]["venue"][0]["location"]["longitude"]
+        
         u.close()
         json.dumps(j)
         return dets
