@@ -7,7 +7,7 @@ def getKey():
     tm = csv[0].split(',')
     return tm[1]
 
-query = "&size=10"
+query = "&size=20"
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -24,6 +24,7 @@ returns dict with keys:
 def tmCall():
     toAppend = True
     urlq = url+query
+    print urlq
     u = urllib2.urlopen(urlq)
     j = json.load(u)
     events = []
@@ -66,8 +67,11 @@ def tmCall():
                 event["note"] = elem["pleaseNote"]
             except:
                 pass
-            event["latitude"] = elem["_embedded"]["venues"][0]["location"]["latitude"]
-            event["longitude"] = elem["_embedded"]["venues"][0]["location"]["longitude"]
+            try:
+                event["latitude"] = elem["_embedded"]["venues"][0]["location"]["latitude"]
+                event["longitude"] = elem["_embedded"]["venues"][0]["location"]["longitude"]
+            except:
+                toAppend = False
             if toAppend:
                 events.append(event)
         
@@ -159,6 +163,6 @@ def tmStartDT(y, m, d, hr, min):
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)
-tmCity("Queens")
-#tmCall()
+#tmCity("Queens")
+tmCall()
 

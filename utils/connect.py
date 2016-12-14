@@ -10,7 +10,7 @@ def addFriend(initiator, friend):
     except:
         c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT")
     query = "INSERT INTO friends VALUES (?, ?)"
-    c.execute(query,(initiator, friend)
+    c.execute(query,(initiator, friend))
     db.commit()
     db.close()
 
