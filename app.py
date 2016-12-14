@@ -44,6 +44,12 @@ def home():
     #print eventsArr
     return render_template("main.html", user = session['username'], events=eventsArr)
 
+#============================================================= SINGLE EVENTS PAGE
+@app.route("/event/<name>/")
+def event(name):
+    return render_template("event.html", user = session['username'], event=name)
+
+
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 #@app.route("/filter/")
 #def filter():
