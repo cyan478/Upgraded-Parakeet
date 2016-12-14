@@ -49,6 +49,11 @@ def home():
 def event(name):
     return render_template("event.html", user = session['username'], event=name)
 
+#============================================================= GETTING DIRECTIONS TO EVENT
+@app.route("/directions/<name>/")
+def directions(name):
+    return render_template("directions.html", user = session['username'], event=name)
+
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 #@app.route("/filter/")
