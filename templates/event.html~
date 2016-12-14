@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+  <head>
+  <title>Hang Out</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="../static/loginstyle.css" type="text/css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <style>
+      html { height: 100% }
+      body { height: 100%; background-color:#CCC }
+      #map-outer {height: 440px; padding: 20px; border: 2px solid #CCC; margin-bottom: 20px; background-color:#FFF }
+    #map-container { height: 400px }
+    @media all and (max-width: 991px) {
+    #map-outer  { height: 650px }
+    }
+    .center-block {
+      float: none !important
+    }
+    [class*="col-"] {
+      margin-bottom: 15px;
+  }
+  .colored-containers{
+    background-color: #ee9d84;
+    border-radius: 5px;
+  }
+
+
+    </style>
+
+
+</head>
+  
+  <body>
+  {% block content %}
+  {% include 'navbar.html' %}
+  {% endblock %}
+
+  <br>
+      
+      
+  <h1><center>{{name}}</center></h1>
+   <div class="container">
+  <div class="row">
+
+  <!-- celine's note to self: should render markers based on locations of events. -->
+    <div id="map-container" class="col-md-8"></div>
+
+  <!-- ========================================================================--> 
+  <!-- ========================================================= LISTING EVENTS--> 
+  <!-- ================================================ dict is called events? --> 
+  <!-- ========================================================================--> 
+    <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
+      <div class = "text-center"><h4>Listed Events</h4></div><br>
+
+
+      HELLO BELOW IS JUST TESTING FOR THE DICTIONARY THANG.
+
+      {% for event in events %}
+        {% for key, value in event.iteritems() %}
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+        {% endfor %}
+      {% endfor %}
+
+    </div> <!-- colored container -->
+
+
+
+
+
+
+
+
+</div><!-- /row -->
+</div><!-- /container -->
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>  
+  
+      function init_map() {
+    var myLocation = new google.maps.LatLng(40.717984,-74.013871);
+      
+        var mapOptions = {
+          center: myLocation,
+          zoom: 16
+        };
+    
+    var marker = new google.maps.Marker({
+      position: myLocation,
+      title:"Stuyvesant High School"});
+      
+        var map = new google.maps.Map(document.getElementById("map-container"),
+            mapOptions);
+    
+    marker.setMap(map); 
+
+      }
+    
+      google.maps.event.addDomListener(window, 'load', init_map);
+    
+    </script>
+
+    <div class="colored-containers col-lg-6 text-center" style="float: none;
+    margin: 0 auto;">
+    Name:
+    <br>Date:
+    <br>Weather:
+    </div>
+
+    <br>
+
+    <div class = "container-fluid text-center">
+    <form>
+    <input type="submit" name= "create" class="btn btn-success" value = "Invite friends">
+    <input type="submit" name = "account" class="btn btn-success" value = "Search for directions">
+    </form>
+    </div>
+
+  <div class="container-fluid">
+    <h3>Photos of Event</h3>
+    insert photo
+    </div>
+
+
+
+  </body>
+  
+  
+</html>
