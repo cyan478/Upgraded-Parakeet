@@ -50,8 +50,9 @@ def event(name):
     return render_template("event.html", user = session['username'], event=name)
 
 #============================================================= GETTING DIRECTIONS TO EVENT
-@app.route("/directions/<name>/")
-def directions(name):
+@app.route("/directions/<id>/")
+def directions(id):
+    info = tmEvents.eventInfo(id)
     return render_template("directions.html", user = session['username'], event=name)
 
 
@@ -77,10 +78,6 @@ def userProfile(user):
     friendsDict = connect.listFriends(user)
     eventsDict = userEvents.listEvents(user)
     return render_template("profile.html", username = user, events=eventsDict)
-
-@app.route("/event/<eventid>/")
-def eventPage(event):
-    return render_template("event.html")
 
 #===================================================================================== LOGOUT
 @app.route("/logout/")
