@@ -135,3 +135,8 @@ nickN -- 2016-12-13 20:00
 
 nickN and elinaH -- 2016-12-13
 - Worked on integrating front end with google directions api.
+
+emmaV -- 2016-12-14
+- Clean up tmEvents to be more efficient and have less issues with
+lack of event details
+- Tailor recommended events to user's demonstrated interests
