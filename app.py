@@ -66,6 +66,11 @@ def joinEvent(id):
     userEvents.addEvent(session['username'], id)
     return redirect( url_for('home') )
 
+#==================getDirections=================
+@app.route("/getdirections/<destination>", methods=['POST'])
+def getDirections(destination):
+    return render_template("event.html",directions=[1,3,4])
+
 #========================userProfile=======================
 @app.route("/user/<user>/")
 def userProfile(user):

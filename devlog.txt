@@ -112,8 +112,11 @@ emmaV & elinaH -- 2016-12-12 12:30
 - Troubleshoot event getting
 
 celineY -- 2016-12-12 12:40
-- Added filtering forms in main.html (radio, text forms,)
+- Added filtering forms in main.html (radio, text forms)
 
 elinaH -- 2016-12-12 21:30
 - Finished the changePass function
 - Added .gitignore so we don't accidentally push API keys and no more .pyc files
+
+celineY -- 2016-12-13 23:59
+- Added event links in main. Working on markers, but it requires a lot of JS knowledge..
