@@ -28,6 +28,19 @@ def addEvent(user, eventid):
     db.commit()
     db.close()
 
+def getEventTypes(user):
+    db = connect(f)
+    c = db.cursor()
+    #get user types
+    query = "SELECT * FROM users WHERE username=?"
+    sel = c.execute(query, (user,))
+    types = []
+    for record in sel:
+        types = record[6].split("-")
+    db.commit()
+    db.close()
+    return types
+
 def listEvents(user):
     db = connect(f)
     c = db.cursor()

@@ -40,7 +40,7 @@ def authenticate():
 #============================================================= ALL EVENTS PAGE (AKA MAIN PAGE)
 @app.route("/mainpage/")
 def home():
-    eventsArr = tmEvents.tmCall()
+    eventsArr = tmEvents.tmCall(session['username'])
     return render_template("main.html", user = session['username'], events=eventsArr)
 
 #============================================================= SINGLE EVENTS PAGE

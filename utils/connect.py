@@ -17,13 +17,7 @@ def addFriend(initiator, friend):
 def findFriends(user):
     db = connect(f)
     c = db.cursor()
-
-    #get user types
-    query = "SELECT * FROM users WHERE username=?"
-    c.execute(query, (user,))
-    uTypes = []
-    for record in sel:
-        uTypes = record[6].split("-")
+    uTypes = userEvents.getEventTypes(user)
 
     #get other ppls types
     query = "SELECT * FROM users"

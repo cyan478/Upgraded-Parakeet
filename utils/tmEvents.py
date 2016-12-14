@@ -1,5 +1,6 @@
 import urllib2
 import json
+import userEvents
 
 def getKey():
     f = open('apikeys.txt','r').read()
@@ -7,7 +8,7 @@ def getKey():
     tm = csv[0].split(',')
     return tm[1]
 
-query = "&size=10"
+query = "&size=10&source=ticketmaster"
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -21,18 +22,27 @@ returns dict with keys:
 'imgs' (array of dicts (dict has ratio, url, w, h, fallback(ignore)))
 'note' (offered by the event) if one exists
 """
-def tmCall():
-    toAppend = True
+def tmCall(user):
     urlq = url+query
     print urlq
     u = urllib2.urlopen(urlq)
     j = json.load(u)
+    types = userEvents.getEventTypes(user)
+    for type in types:
+        tmClassType(type)
     events = []
     for elem in j["_embedded"]["events"]:
         if elem["name"] != "No Longer on Sale for Web":
-            info = eventInfo(elem["id"])
-            if info != {}:
-                events.append(info)
+            attempt = True
+            try: #it should at least have these
+                x = elem["_embedded"]["venues"]
+                y = elem["_links"]["venues"]
+            except: #don't get more info
+                attempt = False
+            if attempt:
+                info = eventInfo(elem["id"])
+                if info != {}:
+                    events.append(info)
         
     u.close()
     json.dumps(j)
@@ -131,6 +141,10 @@ def tmCity(city):
     global query
     query += "&city=%s"%(city)
 
+def tmClassType(type):
+    global query
+    query += "&classificationName=%s"%(type)
+
 def tmStartDT(y, m, d, hr, min):
     global query
     if (m<10):
@@ -145,6 +159,8 @@ def tmStartDT(y, m, d, hr, min):
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)
-tmCity("Queens")
-tmCall()
+#tmCity("Queens")
+#tmCode("11375")
+tmStateCode("NY")
+#tmCall()
 
