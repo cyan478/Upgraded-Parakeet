@@ -36,11 +36,13 @@ def listEvents(user):
     events = []
     for record in sel:
         userEvs = record[5].split("-")
+        print "userEvs" + str(userEvs)
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
-            if info!="N/A" and info != {}:
+            if info != {}:
                 add = {}
                 add['name'] = info['name']
                 add['url'] = info['url']
                 events.append(info)
+    print events
     return events

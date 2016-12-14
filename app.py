@@ -78,6 +78,10 @@ def userProfile(user):
     eventsDict = userEvents.listEvents(user)
     return render_template("profile.html", username = user, events=eventsDict)
 
+@app.route("/event/<eventid>/")
+def eventPage(event):
+    return render_template("event.html")
+
 #===================================================================================== LOGOUT
 @app.route("/logout/")
 def logout():
