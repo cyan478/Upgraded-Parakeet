@@ -50,6 +50,10 @@
    <div class="container">
   <div class="row">
 
+    <div class="col-md-2"> <!-- needs some stylin --> 
+
+
+    </div> <!-- colored container -->
   <!-- celine's note to self: should render markers based on locations of events. -->
     <div id="map-container" class="col-md-8"></div>
 
@@ -57,18 +61,8 @@
   <!-- ========================================================= LISTING EVENTS--> 
   <!-- ================================================ dict is called events? --> 
   <!-- ========================================================================--> 
-    <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
-      <div class = "text-center"><h4>Listed Events</h4></div><br>
+    <div class="col-md-2"><br> <!-- needs some stylin --> 
 
-
-      HELLO BELOW IS JUST TESTING FOR THE DICTIONARY THANG.
-
-      {% for event in events %}
-        {% for key, value in event.iteritems() %}
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-        {% endfor %}
-      {% endfor %}
 
     </div> <!-- colored container -->
 
@@ -114,7 +108,7 @@
     
     </script>
 
-    <div class="colored-containers col-lg-6 text-center" style="float: none;
+    <div class="colored-containers container-fluid col-lg-6 text-center" style="float: none;
     margin: 0 auto;">
     Name:
     <br>Date:
@@ -128,11 +122,6 @@
     <input type="submit" name= "create" class="btn btn-success" value = "Invite friends">
     <input type="submit" name = "account" class="btn btn-success" value = "Search for directions">
     </form>
-    </div>
-
-  <div class="container-fluid">
-    <h3>Photos of Event</h3>
-    insert photo
     </div>
 
 
