@@ -60,12 +60,23 @@ def searchVen(venId):
     link = "https://app.ticketmaster.com/discovery/v2/venues/%s.json?apikey=%s"%(venId,apikey)
     u = urllib2.urlopen(link)
     j = json.load(u)
-    
+
+    print "ADDRESS: " + str(j["address"])
     dets = {}
     dets["city"] = j["name"]
-    dets["zip"] = j["postalCode"]
-    dets["country"] = j["country"]["countryCode"]
-    dets["state"] = j["state"]["stateCode"]
+    try:
+        dets["zip"] = j["postalCode"]
+    except:
+        dets["zip"] = "00000"
+    try:
+        dets["state"] = j["state"]["stateCode"]
+    except:
+        try:
+            inter = j["address"]["line2"].split()
+            dets["state"] = inter[len(inter)-1]
+        except:
+            dets["state"] = ""
+            print "\nNO STATE\n"
     dets["streetAddr"] = j["address"]["line1"]
     
     u.close()
@@ -161,6 +172,6 @@ def tmStartDT(y, m, d, hr, min):
 #tmStartDT(2017,01,03,01,01)
 #tmCity("Queens")
 #tmCode("11375")
-tmStateCode("NY")
+#tmStateCode("NY")
 #tmCall()
 
