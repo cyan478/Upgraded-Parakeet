@@ -150,7 +150,7 @@ lack of event details
 - Troubleshoot more in venue info getting
 - Do basic notifs.py
 - Fix all small silly things in getting info for event page
-- Start getting from filter form and filtering by that
+- Make filtering work!
 
 celineY -- 2016-12-14 20:24
 - Added name & values to form in main

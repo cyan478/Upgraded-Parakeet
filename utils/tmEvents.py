@@ -9,6 +9,7 @@ def getKey():
     return tm[1]
 
 query = "&size=10&source=ticketmaster"
+queryAddons = ""
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
 
@@ -23,8 +24,10 @@ returns dict with keys:
 'note' (offered by the event) if one exists
 """
 def tmCall(user):
-    urlq = url+query
+    global query, queryAddons
+    urlq = url+query+queryAddons
     u = urllib2.urlopen(urlq)
+    queryAddons = ""
     j = json.load(u)
     types = userEvents.getEventTypes(user)
     for type in types:
@@ -138,28 +141,31 @@ def eventInfo(eventId):
         return dets
 
 #===================QUERY ADDITION FXNS==================
+def getQuery():
+    return queryAddons
+
 def tmKeyword(word):
-    global query
-    query += "&keyword=%s"%(word)
+    global queryAddons
+    queryAddons += "&keyword=%s"%(word)
 
 def tmStateCode(stateCode):
-    global query
-    query += "&stateCode=%s"%(stateCode)
+    global queryAddons
+    queryAddons += "&stateCode=%s"%(stateCode)
 
 def tmCode(post):
-    global query
-    query += "&postalCode=%s"%(post)
+    global queryAddons
+    queryAddons += "&postalCode=%s"%(post)
 
 def tmCity(city):
-    global query
-    query += "&city=%s"%(city)
+    global queryAddons
+    queryAddons += "&city=%s"%(city)
 
 def tmClassType(type):
-    global query
-    query += "&classificationName=%s"%(type)
+    global queryAddons
+    queryAddons += "&classificationName=%s"%(type)
 
 def tmStartDT(y, m, d, hr, min):
-    global query
+    global queryAddons
     if (m<10):
         m = "0"+str(m)
     if (d<10):
@@ -168,7 +174,7 @@ def tmStartDT(y, m, d, hr, min):
         hr = "0" + str(hr)
     if (min<10):
         min = "0" + str(min)
-    query += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
+    queryAddons += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)

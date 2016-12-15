@@ -74,15 +74,15 @@
      <form action = "/filter/" method = "POST">
         <div class="form-group">
           <label for="keyword">Keyword</label>
-          <input type="text" name = "Keyword" value="Keyword" class="form-control" placeholder="Keyword">
+          <input type="text" name = "Keyword" class="form-control" placeholder="Keyword">
         </div>
         <div class="form-group">
           <label for="Postal Code">Postal Code</label>
-          <input type="text" name = "Postal Code" value="Postal Code" class="form-control" placeholder="Postal Code">
+          <input type="text" name = "Postal Code" class="form-control" placeholder="Postal Code">
         </div>
         <div class="form-group">
           <label for="City">City</label>
-          <input type="text" name = "City" value="City" class="form-control" placeholder="City">
+          <input type="text" name = "City" class="form-control" placeholder="City">
         </div>
         <b>Date Range</b>
         <div class="checkbox">
@@ -128,18 +128,6 @@
         ['Palace of Westminster, London', 51.499633,-0.124755]
     ];
     -->
-      ---------
-
-      {% for event in events %}
-        {% for key, value in event.iteritems() %}
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-        {% endfor %}
-      {% endfor %}
-
-
-
-
 
 
 </div><!-- /row -->
@@ -175,28 +163,6 @@
     
   
     </script>
-
-    <div class="colored-containers col-lg-6 text-center" style="float: none;
-    margin: 0 auto;">
-    Name:
-    <br>Date:
-    <br>Weather:
-    </div>
-
-    <br>
-
-    <div class = "container-fluid text-center">
-    <form>
-    <input type="submit" name= "create" class="btn btn-success" value = "Invite friends">
-    <input type="submit" name = "account" class="btn btn-success" value = "Search for directions">
-    </form>
-    </div>
-
-  <div class="container-fluid">
-    <h3>Photos of Event</h3>
-    insert photo
-    </div>
-
 
 
   </body>

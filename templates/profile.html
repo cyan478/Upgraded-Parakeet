@@ -52,41 +52,51 @@
 
     <div class = "container-fluid text-center">
 
-    insert their profile pic
-
+    insert your profile pic
 
     <br><br>
 
     <!-- ================================================ BUTTON -->
-    <!-- ================================== need: {{add_or_del}} -->
+    <!-- ================================== need: {{ownProfile}} (TRUE OR FALSE)-->
+    <!-- ================================== need: {{add_or_del}} --> 
     <!-- ======================================================= -->
-  
-    <!-- If this profile is NOT yours. Need to add if statement. -->
-    <form>
-    <!-- ADD CONTACT or DELETE CONTACT in the button on others' profiles -->
+    
+    <!--
+      <div class = "container-fluid text-center">
+      <form>
+      <input type="submit" name= "create" class="btn btn-success" value = {{add_or_del}} >
 
+      </form>
+      </div>
+      <br>
+    -->
 
-    <input type="submit" name= "create" class="btn btn-success" value = {{add_or_del}}>
-    </form>
-    </div>
-    <br><br> 
+    <br> 
     <!-- =================================INFO, EVENTS, & FRIENDS-->
     <!-- ================================== need: {{add_or_del}} -->
-    <!-- ================================== need: {{email}} =====-->
+    <!-- ================================== need: {{email}} =====--> 
+    <!-- ================================== need: {{events}} (array) ====-->
+    <!-- ================================== need: {{friends}} (array) ====-->
     <!-- ======================================================= -->
-   <div class="container-fluid text-center colored-containers">
+   <div class="container-fluid text-center">
     <div class="row">
-    <div class="col-md-2"> 
+    <div class="col-md-2 colored-containers"> 
         <div class = "text-center"><h4>Contact Info</h4><br>
         {{email}}
         </div>
     </div>
     <div class="col-md-8 colored-containers"> 
         <div class = "text-center"><h4>Events Attended</h4><br>
+      {% for event in events %}
+          {{events}}
+      {% endfor %}
         </div>
     </div>
     <div class="col-md-2 colored-containers"> 
         <div class = "text-center"><h4>Friends</h4><br>
+      {% for friend in friends %}
+        {{friend}}
+      {% endfor %}
         </div>
     </div>
   </div><!-- /row -->
