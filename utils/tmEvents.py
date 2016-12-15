@@ -35,7 +35,7 @@ def tmCall(user):
         if elem["name"] != "No Longer on Sale for Web":
             attempt = True
             try: #it should at least have these
-                x = elem["_embedded"]["venues"]
+                x = elem["_embedded"]["venues"][0]["location"]
                 y = elem["_links"]["venues"]
             except: #don't get more info
                 attempt = False
