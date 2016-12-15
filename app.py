@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-from utils import users, userEvents, connect, tmEvents
+from utils import users, userEvents, connect, tmEvents, directions1
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -86,9 +86,8 @@ def joinEvent(id):
 @app.route("/getdirections/<id>", methods=['POST'])
 def getDirections(id):
     event =  tmEvents.eventInfo(id)
-    #out = directions.directions(event['streetAddr'],'345 Chambers Street', 'walking')
-    out='test'
-    return render_template("event.html",event=event,directions= out)
+    out = directions1.directionsCall(event['venue']['streetAddr'].replace(' ','+'),'345+Chambers+Street', 'walking')
+    return render_template("event.html",event=event, directions= out)
 
 #========================userProfile=======================
 @app.route("/user/<user>/")
