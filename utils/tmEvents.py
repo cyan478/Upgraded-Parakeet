@@ -10,8 +10,7 @@ def getKey():
     return tm[1]
 
 query = "&size=10&source=ticketmaster"
-moment = datetime.datetime.now()
-querysDT = "&startDateTime=%s-%s-%sT01:01:00Z"%(moment.year,moment.month,moment.day)
+querySDT = ""
 queryAddons = ""
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
@@ -27,11 +26,12 @@ returns dict with keys:
 'note' (offered by the event) if one exists
 """
 def tmCall(user):
-    global query, queryAddons, querysDT
-    urlq = url+query+querysDT+queryAddons
+    global query, queryAddons, querySDT
+    urlq = url+query+queryAddons+querySDT
+    print urlq
     u = urllib2.urlopen(urlq)
     queryAddons = ""
-    querysDT = "&startDateTime=%s-%s-%sT01:01:00Z"%(moment.year,moment.month,moment.day)
+    querySDT = ""
     j = json.load(u)
     types = userEvents.getEventTypes(user)
     for type in types:
@@ -168,11 +168,12 @@ def tmClassType(type):
     global queryAddons
     queryAddons += "&classificationName=%s"%(type)
 
-def tmStartDT(y, m, d):
-    global queryAddons, querysDT
+def tmStartDT(y, m, d, h):
+    global querySDT
     if (m<10):
         m = "0"+str(m)
     if (d<10):
         d = "0" + str(d)
-    queryAddons += "&startDateTime=%s-%s-%sT01:01:00Z"%(y,m,d)
-    querysDT = ""
+    if (h<10):
+        h = "0" + str(h)
+    querySDT = "&startDateTime=%s-%s-%sT%s:01:00Z"%(y,m,d,h)

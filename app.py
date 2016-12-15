@@ -42,6 +42,8 @@ def authenticate():
 #============================================================= ALL EVENTS PAGE (AKA MAIN PAGE)
 @app.route("/mainpage/")
 def home():
+    n = datetime.datetime.now()
+    tmEvents.tmStartDT(n.year,n.month,n.day,n.hour)
     eventsArr = tmEvents.tmCall(session['username'])
     return render_template("main.html", user = session['username'], events=eventsArr)
 
@@ -90,7 +92,7 @@ def filter():
             add = datetime.timedelta(days=14)
             time = time+add
             print "TIME: " + str(time)
-        tmEvents.tmStartDT(time.year, time.month, time.day)
+        tmEvents.tmStartDT(time.year, time.month, time.day, time.hour)
     return redirect( url_for('home') )
 
 #==================joinEvent=================
