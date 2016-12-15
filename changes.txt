@@ -12,6 +12,8 @@ Changes made to Hang Out, from design document to finish product:
 - Site Map and Component Map: Pretty similar to our original map, main
 	difference being that we opted to have a page for each event
 	showing more info instead of putting all that info on the main page.
+	Got rid of having multiple profile templates and simply use the
+	same one for all profile display.
 
 -Database Schema: Found no need for table UserEvents as we had gotten rid
 	of those. Created a database for notifications (user, message, datetime)
