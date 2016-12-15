@@ -3,19 +3,40 @@
 <html>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
   <head>
-  <title>Notifications</title>
+  <title>Hang Out</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="../static/loginstyle.css" type="text/css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
       <style>
-   .colored-containers{
+      html { height: 100% }
+      body { height: 100%; background-color:#CCC }
+      #map-outer {height: 440px; padding: 20px; border: 2px solid #CCC; margin-bottom: 20px; background-color:#FFF }
+    #map-container { height: 400px }
+    @media all and (max-width: 991px) {
+    #map-outer  { height: 650px }
+    }
+    .center-block {
+      float: none !important
+    }
+    [class*="col-"] {
+      margin-bottom: 15px;
+  }
+  .colored-containers{
     background-color: #ee9d84;
     border-radius: 5px;
   }
+
+.tab-pane{
+    height:375px;
+    overflow-y:scroll;
+}
+
     </style>
 
 
@@ -29,40 +50,132 @@
   <br>
       
       
-  <h1><center>Notifications</center></h1>
-   <div class="container-fluid">
+  <h1><center>All Events Near You</center></h1>
+   <div class="container">
+  <div class="row">
 
   <!-- ========================================================================--> 
-  <!-- ======================================================= GENERATE NOTIFS -->
+  <!-- ============================================================== /FILTER/ -->
   <!-- ========================================================================--> 
-      {% for notif in notifs %}
-        <div class="row">
-        <div class="col-md-2">
-        <div class="col-md-8 colored-containers"><div class = "text-center"><h4>{{notif}}</h4></div>
-        <div class="col-md-2">
+    <div class="col-md-2 colored-containers"><br> 
+      <div class = "text-center"><h4>Filter Events</h4></div>
+      <!--
+      Price Range
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Free</label>
+    </div>
+    <div class="checkbox">
+        <label><input type="checkbox" value="">Up to $5</label></div>
+    <div class="checkbox">
+        <label><input type="checkbox" value="">Up to $10</label></div>
+    <div class="checkbox">
+        <label><input type="checkbox" value="">Up to $20</label></div>
+    <div class="checkbox">
+        <label><input type="checkbox" value="">More than $20</label></div>
+        -->
+        
+       <!-- class form action -> function (ex: filter()) apply - submit button -->
+     <form action = "/filter/" method = "POST">
+        <div class="form-group">
+          <label for="keyword">Keyword</label>
+          <input type="text" name = "Keyword" class="form-control" placeholder="Keyword">
         </div>
+        <div class="form-group">
+          <label for="Postal Code">Postal Code</label>
+          <input type="text" name = "Postal Code" class="form-control" placeholder="Postal Code">
+        </div>
+        <div class="form-group">
+          <label for="City">City</label>
+          <input type="text" name = "City" class="form-control" placeholder="City">
+        </div>
+        <b>Date Range</b>
+        <div class="checkbox">
+              <label><input type="radio" name = "When" value="Today"> Starts today</label>
+        </div>
+        <div class="checkbox">
+              <label><input type="radio" name = "When" value="Week"> Starts a week from today</label>
+        </div>
+        <div class="checkbox">
+              <label><input type="radio" name = "When" value="Two Weeks"> Starts two weeks from today</label>
+        </div>
+        <center><input type="submit" name = "filter" class="btn btn-success" value = "Apply"></center>
+    </form>
+  <br>
+
+  </div>
+  <!-- ========================================================================--> 
+  <!-- ========================================================== END /FILTER/ -->
+  <!-- ========================================================================--> 
+
+  <!-- celine's note to self: should render markers based on locations of events. -->
+    <div id="map-container" class="col-md-8"></div>
+  <!-- ========================================================================--> 
+  <!-- ========================================================= LISTING EVENTS--> 
+  <!-- ================================================ dict is called events? --> 
+  <!-- ========================================================================--> 
+    <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
+      <div class = "text-center"><h4>Listed Events</h4></div><br>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="test">
+      {% for event in events %}
+        
+        <li><a href="/event/{{event.id}}">{{ event.name }}</a></li>
+
       {% endfor %}
 
-</div><!-- /container -->
-
-  <!-- ========================================================================--> 
-  <!-- ====================================================== GENERATE FRIENDS -->
-  <!-- ========================================================================-->
-
-    <h1><center>Recommended Friends</center></h1>
-   <div class="container-fluid">
-
-       {% for notif in notifs %}
-        <div class="row">
-        <div class="col-md-2">
-        <div class="col-md-8 colored-containers"><div class = "text-center"><h4>{{rfriends}}</h4></div>
-        <div class="col-md-2">
+                    </div>
+                </div>
         </div>
-      {% endfor %}
+    </div>
+    </div> <!-- colored container -->
+
+
+<!--   NEED LIST OF LISTS. ex: [[name,latitude,longitude], [name,latitude,longitude]]
+        var markers = [
+        ['London Eye, London', 51.503454,-0.119562],
+        ['Palace of Westminster, London', 51.499633,-0.124755]
+    ];
+    -->
+
+
+</div><!-- /row -->
 </div><!-- /container -->
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>  
+        function init_map() {
+    var myLocation = new google.maps.LatLng(40.717984,-74.013871);
+      
+        var mapOptions = {
+          center: myLocation,
+          zoom: 16
+        };
+    
+    var marker = new google.maps.Marker({
+      position: myLocation,
+      title:"Stuyvesant High School"});
+      
+        var map = new google.maps.Map(document.getElementById("map-container"),
+            mapOptions);
+    
+    marker.setMap(map); 
+      }
+    
+      google.maps.event.addDomListener(window, 'load', init_map);
+    
+  
+    </script>
+
+
 
   </body>
   
   
 </html>
- 
