@@ -7,18 +7,21 @@ from os import urandom
 f = "data/hangout.db"
 
 """
-TEXT username, TEXT email, TEXT salt, TEXT pass, TEXT imgLink, TEXT eventIdList, TEXT types
+TEXT username, TEXT email, TEXT salt, TEXT pass, TEXT eventIdList, TEXT types
 """
 
 def login(user, email, password):
     db = connect(f)
     c = db.cursor()
     query = ("SELECT * FROM users WHERE username=?")
-    sel = c.execute(query,(user,));
+    try:
+        c.execute(query,(user,))
+    except:
+        c.execute("CREATE TABLE users (username TEXT, email TEXT, salt TEXT, password TEXT, imgLink TEXT, eventIdList TEXT, types TEXT)")
+        sel = c.execute(query,(user,));
     
     #records with this username
     #so should be at most one record (in theory)
-     
     for record in sel:
         password = sha1(password+record[2]).hexdigest()#record[2] is the salt
         if (password==record[3]):
@@ -35,7 +38,7 @@ def register(user, email, password):
     try: #does table already exist?
         c.execute("SELECT * FROM users")
     except: #if not, this is the first user!
-        c.execute("CREATE TABLE users (username TEXT, email TEXT, salt TEXT, password TEXT, imgLink TEXT, eventIdList TEXT, types TEXT)")
+        c.execute("CREATE TABLE users (username TEXT, email TEXT, salt TEXT, password TEXT, eventIdList TEXT, types TEXT)")
     db.commit()
     db.close()
     return regMain(user, email, password)#register helper
@@ -46,9 +49,9 @@ def regMain(user, email, password):#register helper
     reg = regReqs(user, email, password)
     if reg == "": #if error message is blank then theres no problem, update database
         salt = urandom(10).encode('hex')
-        query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?)")
+        query = ("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)")
         password = sha1(password + salt).hexdigest()
-        c.execute(query, (user, email, salt, password, "N/A", "", ""))
+        c.execute(query, (user, email, salt, password, "", ""))
         db.commit()
         db.close()
         return "Account created!"
@@ -78,14 +81,6 @@ def duplicate(user,email):#checks if username already exists
     db.commit()
     db.close()
     return retVal
-
-def updateImgLink(user,link):
-    db = connect(f)
-    c = db.cursor()
-    query = "UPDATE users SET imgLink=? WHERE username=?"
-    c.execute(query, (link, user))
-    db.commit()
-    db.close()
 
 def changePass(user,oldPss,newPass):
     db = connect(f)
