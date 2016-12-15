@@ -1,4 +1,5 @@
 from sqlite3 import connect
+import userEvents
 
 f = "data/hangout.db"
 
