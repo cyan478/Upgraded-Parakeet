@@ -103,7 +103,7 @@ def joinEvent(id):
 @app.route("/getdirections/<id>", methods=['POST'])
 def getDirections(id):
     event =  tmEvents.eventInfo(id)
-    out = directions1.directionsCall(event['venue']['streetAddr'].replace(' ','+'),'345+Chambers+Street', 'walking')
+    out = directions1.directionsCall(event['venue']['streetAddr'].replace(' ','+'),request.form['location'].replace(' ','+'), request.form['trans'])
     return render_template("event.html",event=event, directions= out)
 
 #========================userProfile=======================
