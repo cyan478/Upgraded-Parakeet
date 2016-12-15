@@ -111,7 +111,7 @@ def getDirections(id):
 def userProfile(user):
     friendsDict = connect.listFriends(user)
     eventsDict = userEvents.listEvents(user)
-    return render_template("profile.html", username = user, events=eventsDict)
+    return render_template("profile.html", username=user, events=eventsDict, friends=friendsDict, email=users.getEmail(user))
 
 @app.route("/user/")
 def profile():
