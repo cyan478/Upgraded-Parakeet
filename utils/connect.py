@@ -22,7 +22,7 @@ def findFriends(user):
 
     #get other ppls types
     query = "SELECT * FROM users"
-    sel = c.execute(query, (user,))
+    sel = c.execute(query)
     users = []
     for record in sel:
         if record[0] == user:
