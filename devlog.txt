@@ -157,6 +157,12 @@ celineY -- 2016-12-14 20:24
 - Started on notifications.html
 - Wrote function to iterate through array of notifs. Needs testing.
 
+elinaH -- 2016-12-14 20:48
+- Added invite friends function to userEvents.py
+
+elinaH -- 2016-12-14 22:30
+- Changed main so that it only shows what needs to be shown
+
 celineY -- 2016-12-14 22:59
 - Modified profile. 
 - Added scrolly thing in main.
@@ -166,3 +172,15 @@ emmaV -- 2016-12-15 00:30
 - Don't show events that have already happened
 - Fix bug with TM links
 - Do app.py /notifications and /addConnect
+
+elinaH -- 2016-12-15 00:50
+- Implemented back end weather API functions into front end
+- Fixed it so that strings were converted into ints
+- Correctly compares days based on day of the year rather than using days and months
+
+elinaH -- 2016-12-15 2:00
+- Fixed profile link so it the navbar always correctly linked you
+- Made more edge cases for the weather API in case it didn't have all of the information
+- Made spacing more consistent on notifications.html
+- Added the add recommended friends button
+
