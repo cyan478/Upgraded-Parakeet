@@ -19,7 +19,11 @@ def getNotifs(user):
     db = connect(f)
     c = db.cursor()
     query = "SELECT message FROM notifs WHERE username=? ORDER BY datetime asc"
-    sel = c.execute(query, (user,))
+    try:
+        sel = c.execute(query, (user,))
+    except:
+        c.execute("CREATE TABLE notifs (username TEXT, message TEXT, datetime TEXT)")
+        sel = c.execute(query, (user,))
     notifs = []
     for msg in sel:
         notifs.append(msg[0])

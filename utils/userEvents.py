@@ -52,8 +52,9 @@ def listEvents(user):
         print "userEvs" + str(userEvs)
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
-            if info is not None:
+            if info is not None and info.keys() != []:
                 add = {}
+                print "KEYS: " + str(info.keys())
                 add['name'] = info['name']
                 add['url'] = info['url']
                 events.append(info)

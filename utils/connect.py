@@ -9,7 +9,7 @@ def addFriend(initiator, friend):
     try:
         c.execute("SELECT * FROM friends")
     except:
-        c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT")
+        c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT)")
     query = "INSERT INTO friends VALUES (?, ?, ?)"
     c.execute(query,(initiator, friend, "Confirmed"))
     db.commit()
@@ -22,7 +22,11 @@ def findFriends(user):
 
     #get other ppls types
     query = "SELECT * FROM users"
-    sel = c.execute(query)
+    try:
+        sel = c.execute(query)
+    except:
+         c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT)")
+         sel = c.execute(query)
     users = []
     for record in sel:
         if record[0] == user:
@@ -40,7 +44,11 @@ def listFriends(user):
     db = connect(f)
     c = db.cursor()
     query = "SELECT * FROM friends WHERE initiator=? or friend=?"
-    sel=c.execute(query,(user,user))
+    try:
+        sel=c.execute(query,(user,user))
+    except:
+         c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT)")
+         sel = c.execute(query,(user,user))
     friends = []
     for record in sel:
         if record[0] == user:
