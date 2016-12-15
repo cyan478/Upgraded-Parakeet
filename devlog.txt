@@ -165,3 +165,4 @@ emmaV -- 2016-12-15 00:30
 - Make datetime present prettier
 - Don't show events that have already happened
 - Fix bug with TM links
+- Do app.py /notifications and /addConnect
