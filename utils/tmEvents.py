@@ -104,6 +104,7 @@ def eventInfo(eventId):
         dets["id"] = j["id"]
         dets["name"] = j["name"]
         dets["url"] = j["url"]
+        dets["date"] = j["dates"]["start"]["dateTime"]
         dets["latitude"] = j["_embedded"]["venues"][0]["location"]["latitude"]
         dets["longitude"] = j["_embedded"]["venues"][0]["location"]["longitude"]
         venId = j["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
