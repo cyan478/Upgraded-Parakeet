@@ -94,18 +94,25 @@
       <br>Date: {{event.date}}
       <br>{{weather}}
       <br><a href="{{event.url}}">More Info</a>
-      <br>{{event}}
+    
     </div>
 
     <br>
-    <div class = "container-fluid text-center">
+    <div class = "container-fluid text-center" style="float: none; margin: 0 auto;">
       <form>
 	<a href="/joinEvent/{{event.id}}" name= "join" class="btn btn-success" value = "Join Event">Create Event</a>
 	<input type="submit" name= "create" class="btn btn-success" value = "Invite friends">
 	<a href="/directions/{{event.id}}" name="info" class="btn btn-success">Get Directions</a>
       </form>
     </div>
-    <div>{{directions}}</div>
+    <br>
+    <div class="colored-containers">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 colored-containers">{{directions}}</div>
+      <div class="col-md-3"></div>
+    </div>
+    
+    <!--<div class="colored-containers col-lg-6 text-center">{{directions}}</div>-->
   </body>
   
   
