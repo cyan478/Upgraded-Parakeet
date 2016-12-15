@@ -1,0 +1,19 @@
+Changes made to Hang Out, from design document to finish product:
+- Idea: nothing was removed from the concept but we added extra
+	functionality, by incorporating the Wunderground API to help
+	users plan their event trip by having an idea of what the
+	weather will be like.
+	
+- Details: We chose not to let users make their own events as it
+	felt redundant and not as core to what we wanted to accompish.
+	We also have slightly different filters for events than what
+	we had initially thought due to TM query options.
+	
+- Site Map and Component Map: Pretty similar to our original map, main
+	difference being that we opted to have a page for each event
+	showing more info instead of putting all that info on the main page.
+	Got rid of having multiple profile templates and simply use the
+	same one for all profile display.
+
+-Database Schema: Found no need for table UserEvents as we had gotten rid
+	of those. Created a database for notifications (user, message, datetime)
