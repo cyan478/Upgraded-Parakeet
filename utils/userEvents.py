@@ -52,7 +52,7 @@ def listEvents(user):
         print "userEvs" + str(userEvs)
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
-            if info != {}:
+            if info is not None:
                 add = {}
                 add['name'] = info['name']
                 add['url'] = info['url']
