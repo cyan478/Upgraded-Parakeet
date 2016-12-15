@@ -14,8 +14,9 @@ def login(user, email, password):
     db = connect(f)
     c = db.cursor()
     query = ("SELECT * FROM users WHERE username=?")
+    sel = ""
     try:
-        c.execute(query,(user,))
+        sel = c.execute(query,(user,))
     except:
         c.execute("CREATE TABLE users (username TEXT, email TEXT, salt TEXT, password TEXT, imgLink TEXT, eventIdList TEXT, types TEXT)")
         sel = c.execute(query,(user,));
