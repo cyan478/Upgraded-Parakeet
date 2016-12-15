@@ -23,17 +23,21 @@ def wuCall(year, month, day):
 		location = parsed_json['location']['city']
 		retStr += "In %s, \n " % (location)
 	if (dayOfEvent - currDay == 0):
-		temp_f = parsed_json['current_observation']['temp_f']
-		weather = parsed_json['current_observation']['weather']
-		cond = parsed_json['forecast']['simpleforecast']['forecastday'][0]['conditions']
-		highTemp = parsed_json['forecast']['simpleforecast']['forecastday'][0]['high']['fahrenheit']
-		lowTemp = parsed_json['forecast']['simpleforecast']['forecastday'][0]['low']['fahrenheit']
-		retStr += "Current temperature: %s \n Weather: %s \n Forecasted condition: %s \n High temperature: %s \n Low temperature: %s" % (temp_f, weather, cond, highTemp, lowTemp)
+		if 'current_observation' in parsed_json.keys():
+			temp_f = parsed_json['current_observation']['temp_f']
+			weather = parsed_json['current_observation']['weather']
+			retStr += "Current temperature: %s \n Weather: %s \n " % (temp_f, weather)
+		if 'forecast' in parsed_json.keys():
+			cond = parsed_json['forecast']['simpleforecast']['forecastday'][0]['conditions']
+			highTemp = parsed_json['forecast']['simpleforecast']['forecastday'][0]['high']['fahrenheit']
+			lowTemp = parsed_json['forecast']['simpleforecast']['forecastday'][0]['low']['fahrenheit']
+			retStr += "Forecasted condition: %s \n High temperature: %s \n Low temperature: %s" % (cond, highTemp, lowTemp)
 	else:
-		cond = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['conditions']
-		highTemp = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['high']['fahrenheit']
-		lowTemp = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['low']['fahrenheit']
-		retStr += "Forecasted condition: %s \n High temperature: %s \n Low temperature: %s" % (cond, highTemp, lowTemp)
+		if 'forecast' in parsed_json.keys():
+			cond = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['conditions']
+			highTemp = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['high']['fahrenheit']
+			lowTemp = parsed_json['forecast']['simpleforecast']['forecastday'][dayOfEvent - currDay]['low']['fahrenheit']
+			retStr += "Forecasted condition: %s \n High temperature: %s \n Low temperature: %s" % (cond, highTemp, lowTemp)
 	#print parsed_json['forecast']['simpleforecast']['forecastday'][0]['date']['day']
 	return retStr
 	u.close()
