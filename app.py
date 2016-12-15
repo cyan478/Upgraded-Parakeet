@@ -51,8 +51,6 @@ def home():
 @app.route("/event/<id>/")
 def event(id):
     info = tmEvents.eventInfo(id)
-    spl = info["date"].split("T")
-    info["date"] = " " + spl[0] + " " + str(spl[1])[:5]
     zip = info["venue"]["zip"]
     state = info["venue"]["state"]
     if zip != "00000":
@@ -60,8 +58,8 @@ def event(id):
     elif state != "":
       wunderground.location(state, info["venue"]["city"])
     else:
-      return render_template("event.html", user = session['username'], event=info, weather="Venue doesn't have enough information")
-    return render_template("event.html", user = session['username'], event=info, weather=wunderground.wuCall(info["date"][8:10],info["date"][5:7]))
+      return render_template("event.html", user = session['username'], event = info, weather = "Venue doesn't have enough information")
+    return render_template("event.html", user = session['username'], event = info, weather = wunderground.wuCall(int(info["date"][0:4]),int(info["date"][5:7]),int(info["date"][8:10])))
 
 #============================================================= GETTING DIRECTIONS TO EVENT
 @app.route("/directions/<id>/")
