@@ -8,9 +8,9 @@ def addFriend(initiator, friend):
     try:
         c.execute("SELECT * FROM friends")
     except:
-        c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT")
-    query = "INSERT INTO friends VALUES (?, ?)"
-    c.execute(query,(initiator, friend))
+        c.execute("CREATE TABLE friends (initiator TEXT, friend TEXT, status TEXT")
+    query = "INSERT INTO friends VALUES (?, ?, ?)"
+    c.execute(query,(initiator, friend, "Confirmed"))
     db.commit()
     db.close()
 
@@ -50,19 +50,6 @@ def listFriends(user):
     db.close()
     return friends
 
-""" for old fxnality
-def acceptReq(initiator, friend):
-    db = connect(f)
-    c = db.cursor()
-    query = "UPDATE friends SET status=? WHERE initiator=? AND friend=?"
-    c.execute(query, ("accepted", initiator, friend))
-    now = datetime.datetime.now()
-    date = (now.month)*1000000 + (now.day)*10000 + now.year
-    query = "UPDATE friends SET date=? WHERE initiator=? AND friend=?"
-    c.execute(query, (date, initiator, friend))
-    db.commit()
-    db.close()
-
 def removeFriend(deletor, deleted):
     db = connect(f)
     c = db.cursor()
@@ -72,26 +59,12 @@ def removeFriend(deletor, deleted):
     db.commit()
     db.close()
 
-def isFriendversary(friendA, friendB):
+""" for old fxnality
+def acceptReq(initiator, friend):
     db = connect(f)
     c = db.cursor()
-    now = datetime.datetime.now()
-    date = (now.month)*100 + (now.day)
-    
-    query = "SELECT * FROM friends WHERE initiator=? AND friend=?"
-    sel = c.execute(query, (friendA, friendB))
-    for record in sel: #where record[3] = date
-        if record[3]/10000 == date:
-            db.commit()
-            db.close()
-            return True
-    sel = c.execute(query, (friendB, friendA))
-    for record in sel:
-        if record[3]/10000 == date:
-            db.commit()
-            db.close()
-            return True
+    query = "UPDATE friends SET status=? WHERE initiator=? AND friend=?"
+    c.execute(query, ("accepted", initiator, friend))
     db.commit()
     db.close()
-    return False
 """
