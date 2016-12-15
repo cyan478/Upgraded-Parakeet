@@ -38,6 +38,10 @@ def tmCall(user):
         if len(type) > 0:
             tmClassType(type)
     events = []
+    try:
+        x = j["_embedded"]["events"]
+    except:
+        return events
     for elem in j["_embedded"]["events"]:
         if elem["name"] != "No Longer on Sale for Web":
             attempt = True
