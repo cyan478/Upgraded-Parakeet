@@ -21,6 +21,7 @@ def login():
 #======================================================================= AUTHENTICATING LOGIN
 @app.route("/authenticate/", methods=['POST'])
 def authenticate():
+    print request.form.values()
     pw = request.form["password"]
     un = request.form["user"]
     em = request.form["email"]
@@ -57,13 +58,23 @@ def directions(id):
 
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
-@app.route("/filter/")
+@app.route("/filter/", methods=['POST'])
 def filter():
-    keyword = request.form['Keyword']
-    pCode = request.form['Postal Code']
-    city = request.form['City']
-    when = request.form['When']
+    keyword=""
+    pCode=""
+    city=""
+    when=""
+    print request.form.values()
+    if 'keyword' in request.form.values():
+        keyword = request.form['Keyword']
+    if 'Keyword' in request.form.values():
+        pCode = request.form['Postal Code']
+    if 'Keyword' in request.form.values():
+        city = request.form['City']
+    if 'Keyword' in request.form.values():
+        when = request.form['When']
     print "KEYWORD: " + keyword + "\nPCODE: " + pCode
+    return redirect( url_for('home') )
 
 #==================joinEvent=================
 @app.route("/joinEvent/<id>")
