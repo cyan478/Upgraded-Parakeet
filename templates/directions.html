@@ -64,7 +64,7 @@
     <script>  
       
       function init_map() {
-      var myLocation = new google.maps.LatLng(40.717984,-74.013871);
+      var myLocation = new google.maps.LatLng({{event.latitude}},{{event.longitude}});
       
       var mapOptions = {
       center: myLocation,
@@ -73,7 +73,7 @@
       
       var marker = new google.maps.Marker({
       position: myLocation,
-      title:"Stuyvesant High School"});
+      title:"{{event.name}}"});
       
       var map = new google.maps.Map(document.getElementById("map-container"),
       mapOptions);
@@ -93,19 +93,19 @@
 	  <form action = "/getdirections/{{event.id}}" method = "POST"><!--ADD IN EVENT LOCATION HERE-->
 	    <div class="form-group">
               <label for="start"><b>Start Location</b></label>
-              <input type="text" class="form-control" placeholder="345 Chambers Street">
+              <input type="text" name="location" class="form-control" placeholder="345 Chambers Street">
 	    </div>
 	    <b>Mode of Transportation</b>
             <div class="checkbox">
-              <label><input type="radio" value="1"> Driving</label>
+              <label><input name="trans" type="radio" value="1"> Driving</label>
             </div>
             <div class="checkbox">
-              <label><input type="radio" value="2"> Public Transport</label>
+              <label><input name="trans" type="radio" value="2"> Public Transport</label>
             </div>
             <div class="checkbox">
-              <label><input type="radio" value="3"> Walking</label>
+              <label><input name="trans" type="radio" value="3"> Walking</label>
             </div>
-            <center><input type="submit" name = "info" class="btn btn-success" value = "Apply"></center>
+            <center><input type="submit" class="btn btn-success" value="Apply"></center>
 	  </form>
      	  <div class = "col-md-4"></div>
 	  <br>
