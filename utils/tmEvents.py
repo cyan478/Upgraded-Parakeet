@@ -92,7 +92,6 @@ returns dictionary of info about eventId with keys:
 def eventInfo(eventId):
     if eventId != "N/A":
         link = "https://app.ticketmaster.com/discovery/v2/events/%s.json?apikey=%s"%(eventId,apikey)
-        print link
         try:
             u = urllib2.urlopen(link)
         except:
@@ -104,7 +103,10 @@ def eventInfo(eventId):
         dets["id"] = j["id"]
         dets["name"] = j["name"]
         dets["url"] = j["url"]
-        dets["date"] = j["dates"]["start"]["dateTime"]
+        try:
+            dets["date"] = j["dates"]["start"]["dateTime"]
+        except:
+            dets["date"] = "Date TBA"
         dets["latitude"] = j["_embedded"]["venues"][0]["location"]["latitude"]
         dets["longitude"] = j["_embedded"]["venues"][0]["location"]["longitude"]
         venId = j["_links"]["venues"][0]["href"].split("/")[4].split("?")[0]
