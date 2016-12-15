@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-from utils import users, userEvents, connect, tmEvents, directions1, wunderground
+from utils import users, userEvents, connect, tmEvents, directions1, wunderground, notifs
 import datetime
 app = Flask(__name__)
 app.secret_key = "deal with this later"
@@ -114,6 +114,18 @@ def userProfile(user):
     friendsDict = connect.listFriends(user)
     eventsDict = userEvents.listEvents(user)
     return render_template("profile.html", username = user, events=eventsDict)
+
+#========================notifications===================
+@app.route("/notifications/")
+def notifications():
+    msgs = notifs.getNotifs(session['username'])
+    return render_template("notifications.html", notifs=msgs,rfriends=connect.findFriends(session['username']))
+
+#========================addFriend======================
+@app.route("/addConnect/<newC>")
+def addConnect(newC):
+    connect.addFriend(session['username'], newC)
+    return redirect( url_for('notifications') )
 
 #===================================================================================== LOGOUT
 @app.route("/logout/")
