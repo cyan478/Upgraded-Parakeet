@@ -84,10 +84,12 @@
         </div>
     </div>
     <div class="col-md-8 colored-containers"> 
-        <div class = "text-center"><h4>Events Attended</h4><br>
-      {% for event in events %}
-          {{events}}
-      {% endfor %}
+      <div class = "text-center"><h4>Events Attended</h4><br>
+	{% for event in events %}
+        
+        <li><a href="/event/{{event.id}}">{{ event.name }}</a></li>
+	
+	{% endfor %}
         </div>
     </div>
     <div class="col-md-2 colored-containers"> 
