@@ -148,4 +148,5 @@ emmaV -- 2016-12-14
 lack of event details
 - Tailor recommended events to user's demonstrated interests
 - Troubleshoot more in venue info getting
-- Start notifs.py
+- Do basic notifs.py
+- Fix all small silly things in getting info for event page
