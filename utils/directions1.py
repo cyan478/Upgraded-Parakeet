@@ -7,7 +7,7 @@ def getKey():
     return di[1]
 
 
-def directionsCall(origin, dest, mode):
+def directionsCall(dest, origin, mode):
   APIkey = getKey()
   url = "https://maps.googleapis.com/maps/api/directions/json?"
   query=""
@@ -21,7 +21,7 @@ def directionsCall(origin, dest, mode):
   parsed_json = json.loads(json_string)
   retstr=''
   for elem in parsed_json["routes"][0]["legs"][0]["steps"]:
-    retstr+= elem["html_instructions"]
+      retstr+= elem["html_instructions"].replace('<b>','').replace('</b>','').replace('<div style="font-size:0.9em">','').replace('</div>','')+'\n'
   return retstr
 
 
