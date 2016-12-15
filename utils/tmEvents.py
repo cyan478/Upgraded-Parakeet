@@ -101,6 +101,7 @@ def eventInfo(eventId):
 
         dets = {}
         #try:
+        dets["id"] = j["id"]
         dets["name"] = j["name"]
         dets["url"] = j["url"]
         dets["latitude"] = j["_embedded"]["venues"][0]["location"]["latitude"]
