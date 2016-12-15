@@ -12,7 +12,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
       <style>
- 
+   .colored-containers{
+    background-color: #ee9d84;
+    border-radius: 5px;
+  }
     </style>
 
 
@@ -33,18 +36,12 @@
   <!-- ========================================================================--> 
   <!-- ======================================================= GENERATE NOTIFS -->
   <!-- ========================================================================--> 
-    <div class="col-md-2 colored-containers"><br> 
-      <div class = "text-center"><h4>Filter Events</h4></div>
-    
-  </div>
-<!--
-      {% for event in events %}
-        {% for key, value in event.iteritems() %}
-            <dt>{{ key }}</dt>
-            <dd>{{ value }}</dd>
-        {% endfor %}
+
+      {% for notif in notifs %}
+        <div class="col-md-2"></div>
+        <div class="col-md-8 colored-containers"><div class = "text-center"><h4>{{notif}}</h4></div>
+        <div class="col-md-2"></div>
       {% endfor %}
--->
 
 
 </div><!-- /row -->
