@@ -160,3 +160,8 @@ celineY -- 2016-12-14 20:24
 celineY -- 2016-12-14 22:59
 - Modified profile. 
 - Added scrolly thing in main.
+
+emmaV -- 2016-12-15 00:30
+- Make datetime present prettier
+- Don't show events that have already happened
+- Fix bug with TM links
