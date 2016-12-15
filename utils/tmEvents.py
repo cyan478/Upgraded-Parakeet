@@ -24,7 +24,6 @@ returns dict with keys:
 """
 def tmCall(user):
     urlq = url+query
-    print urlq
     u = urllib2.urlopen(urlq)
     j = json.load(u)
     types = userEvents.getEventTypes(user)
@@ -62,7 +61,6 @@ def searchVen(venId):
     u = urllib2.urlopen(link)
     j = json.load(u)
 
-    print "ADDRESS: " + str(j["address"])
     dets = {}
     dets["city"] = j["name"]
     try:
@@ -77,7 +75,6 @@ def searchVen(venId):
             dets["state"] = inter[len(inter)-1]
         except:
             dets["state"] = ""
-            print "\nNO STATE\n"
     dets["streetAddr"] = j["address"]["line1"]
     
     u.close()

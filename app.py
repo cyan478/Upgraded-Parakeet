@@ -57,9 +57,13 @@ def directions(id):
 
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
-#@app.route("/filter/")
-#def filter():
-    
+@app.route("/filter/")
+def filter():
+    keyword = request.form['Keyword']
+    pCode = request.form['Postal Code']
+    city = request.form['City']
+    when = request.form['When']
+    print "KEYWORD: " + keyword + "\nPCODE: " + pCode
 
 #==================joinEvent=================
 @app.route("/joinEvent/<id>")
