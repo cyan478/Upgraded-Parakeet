@@ -113,6 +113,10 @@ def userProfile(user):
     eventsDict = userEvents.listEvents(user)
     return render_template("profile.html", username = user, events=eventsDict)
 
+@app.route("/user/")
+def profile():
+  return redirect(url_for('userProfile', user=session['username']))
+
 #========================notifications===================
 @app.route("/notifications/")
 def notifications():
