@@ -33,6 +33,14 @@ def login(user, email, password):
     db.close()
     return "Username does not exist"#error message
 
+def getEmail(user):
+    db = connect(f)
+    c = db.cursor()
+    query = "SELECT email FROM users WHERE username=?"
+    sel = c.execute(query, (user,))
+    for email in sel:
+        return email[0]
+
 def register(user, email, password):
     db = connect(f)
     c = db.cursor()
