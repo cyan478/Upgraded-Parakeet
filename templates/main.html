@@ -32,6 +32,10 @@
     border-radius: 5px;
   }
 
+.tab-pane{
+    height:375px;
+    overflow-y:scroll;
+}
 
     </style>
 
@@ -105,20 +109,25 @@
 
   <!-- celine's note to self: should render markers based on locations of events. -->
     <div id="map-container" class="col-md-8"></div>
-
   <!-- ========================================================================--> 
   <!-- ========================================================= LISTING EVENTS--> 
   <!-- ================================================ dict is called events? --> 
   <!-- ========================================================================--> 
     <div class="col-md-2 colored-containers"><br> <!-- needs some stylin --> 
       <div class = "text-center"><h4>Listed Events</h4></div><br>
- 
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="test">
       {% for event in events %}
         
         <li><a href="/event/{{event.id}}">{{ event.name }}</a></li>
 
       {% endfor %}
 
+                    </div>
+                </div>
+        </div>
+    </div>
     </div> <!-- colored container -->
 
 
@@ -163,6 +172,7 @@
     
   
     </script>
+
 
 
   </body>

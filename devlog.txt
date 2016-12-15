@@ -156,3 +156,7 @@ celineY -- 2016-12-14 20:24
 - Added name & values to form in main
 - Started on notifications.html
 - Wrote function to iterate through array of notifs. Needs testing.
+
+celineY -- 2016-12-14 22:59
+- Modified profile. 
+- Added scrolly thing in main.
