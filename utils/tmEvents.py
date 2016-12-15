@@ -29,7 +29,8 @@ def tmCall(user):
     j = json.load(u)
     types = userEvents.getEventTypes(user)
     for type in types:
-        tmClassType(type)
+        if len(type) > 0:
+            tmClassType(type)
     events = []
     for elem in j["_embedded"]["events"]:
         if elem["name"] != "No Longer on Sale for Web":
