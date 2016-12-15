@@ -10,7 +10,7 @@ def addEvent(user, eventid):
     query = "SELECT * FROM users WHERE username=?"
     sel = c.execute(query, (user,))
     for record in sel:
-        idList = record[5]
+        idList = record[4]
         if (idList != ""):
             idList += "-%s"%(eventid)
         else:
@@ -18,7 +18,7 @@ def addEvent(user, eventid):
         query = "UPDATE users SET eventIdList=? WHERE username=?"
         c.execute(query, (idList, user))
 
-        types = record[6]
+        types = record[5]
         if (types != ""):
             types += "-%s"%(info["type"])
         else:
