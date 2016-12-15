@@ -164,17 +164,13 @@ def tmClassType(type):
     global queryAddons
     queryAddons += "&classificationName=%s"%(type)
 
-def tmStartDT(y, m, d, hr, min):
+def tmStartDT(y, m, d):
     global queryAddons
     if (m<10):
         m = "0"+str(m)
     if (d<10):
         d = "0" + str(d)
-    if (hr<10):
-        hr = "0" + str(hr)
-    if (min<10):
-        min = "0" + str(min)
-    queryAddons += "&startDateTime=%s-%s-%sT%s:%s:00Z"%(y,m,d,hr,min)
+    queryAddons += "&startDateTime=%s-%s-%sT01:01:00Z"%(y,m,d)
 
 #only events starting after 2017-01-03 01:01
 #tmStartDT(2017,01,03,01,01)

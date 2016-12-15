@@ -1,5 +1,6 @@
 from flask import Flask, session, request, url_for, redirect, render_template
 from utils import users, userEvents, connect, tmEvents, directions1, wunderground
+import datetime
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -48,6 +49,8 @@ def home():
 @app.route("/event/<id>/")
 def event(id):
     info = tmEvents.eventInfo(id)
+    spl = info["date"].split("T")
+    info["date"] = " " + spl[0] + " " + str(spl[1])[:5]
     zip = info["venue"]["zip"]
     state = info["venue"]["state"]
     if zip != "00000":
@@ -77,8 +80,17 @@ def filter():
     city = request.form['City']
     if city!="":
         tmEvents.tmCity(city)
-    #when = request.form['When']
-    print "QUERY: " + tmEvents.getQuery()
+    if 'When' in request.form:
+        when = request.form['When']
+        time = datetime.datetime.now()
+        if when=="Week":
+            add = datetime.timedelta(days=7)
+            time = time+add
+        else: #when=Two Weeks
+            add = datetime.timedelta(days=14)
+            time = time+add
+            print "TIME: " + str(time)
+        tmEvents.tmStartDT(time.year, time.month, time.day)
     return redirect( url_for('home') )
 
 #==================joinEvent=================
