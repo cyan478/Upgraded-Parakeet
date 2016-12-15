@@ -47,8 +47,7 @@ def home():
 @app.route("/event/<id>/")
 def event(id):
     info = tmEvents.eventInfo(id)
-    print info
-    return render_template("event.html", user = session['username'], event=id)
+    return render_template("event.html", user = session['username'], event=info)
 
 #============================================================= GETTING DIRECTIONS TO EVENT
 @app.route("/directions/<id>/")
