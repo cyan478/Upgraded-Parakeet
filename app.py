@@ -1,5 +1,5 @@
 from flask import Flask, session, request, url_for, redirect, render_template
-from utils import users, userEvents, connect, tmEvents, directions1
+from utils import users, userEvents, connect, tmEvents, directions1, wunderground
 app = Flask(__name__)
 app.secret_key = "deal with this later"
 
@@ -48,7 +48,15 @@ def home():
 @app.route("/event/<id>/")
 def event(id):
     info = tmEvents.eventInfo(id)
-    return render_template("event.html", user = session['username'], event=info)
+    zip = info["venue"]["zip"]
+    state = info["venue"]["state"]
+    if zip != "00000":
+      wunderground.zipcode(zip)
+    elif state != "":
+      wunderground.location(state, info["venue"]["city"])
+    else:
+      return render_template("event.html", user = session['username'], event=info, weather="Venue doesn't have enough information")
+    return render_template("event.html", user = session['username'], event=info, weather=wunderground.wuCall(info["date"][8:10],info["date"][5:7]))
 
 #============================================================= GETTING DIRECTIONS TO EVENT
 @app.route("/directions/<id>/")

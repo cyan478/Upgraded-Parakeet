@@ -1,7 +1,7 @@
 import urllib2, json, datetime
 
 def getKey():
-    f = open('../apikeys.txt','r').read()
+    f = open('apikeys.txt','r').read()
     csv = f.split('\n')
     wu = csv[1].split(',')
     return wu[1]
