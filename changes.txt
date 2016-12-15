@@ -17,3 +17,4 @@ Changes made to Hang Out, from design document to finish product:
 
 -Database Schema: Found no need for table UserEvents as we had gotten rid
 	of those. Created a database for notifications (user, message, datetime)
+	Also removed imgLink column from table users
