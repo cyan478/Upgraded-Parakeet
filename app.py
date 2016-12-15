@@ -60,20 +60,17 @@ def directions(id):
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
 @app.route("/filter/", methods=['POST'])
 def filter():
-    keyword=""
-    pCode=""
-    city=""
-    when=""
-    print request.form.values()
-    if 'keyword' in request.form.values():
-        keyword = request.form['Keyword']
-    if 'Keyword' in request.form.values():
-        pCode = request.form['Postal Code']
-    if 'Keyword' in request.form.values():
-        city = request.form['City']
-    if 'Keyword' in request.form.values():
-        when = request.form['When']
-    print "KEYWORD: " + keyword + "\nPCODE: " + pCode
+    keyword=request.form['Keyword']
+    if keyword != "":
+        tmEvents.tmKeyword(keyword)
+    pCode = request.form['Postal Code']
+    if len(pCode)==5:
+        tmEvents.tmCode(pCode)
+    city = request.form['City']
+    if city!="":
+        tmEvents.tmCity(city)
+    #when = request.form['When']
+    print "QUERY: " + tmEvents.getQuery()
     return redirect( url_for('home') )
 
 #==================joinEvent=================
