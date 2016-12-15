@@ -124,14 +124,21 @@ elinaH -- 2016-12-12 21:30
 nickN -- 2016-12-12 23:00
 - Worked on profile
 
-celineY -- 2016-12-13 23:59
-- Added event links in main. Working on markers, but it requires a lot of JS knowledge..
-
 nickN -- 2016-12-13 18:00
 - Created events.html and began displaying event info
 
 nickN -- 2016-12-13 20:00
 - Created directions.html and worked on routing between pages
+
+elinaH -- 2016-12-13 23:04
+- Added latitude and longitude to info that events give
+
+celineY -- 2016-12-13 23:59
+- Added event links in main. Working on markers, but it requires a lot of JS knowledge..
+
+elinaH -- 2016-12-13 23:59
+- Added month restriction to weather, so that it can't forecast too far in the future
+- Started directions.py, which gives info on how to get to the event
 
 nickN and elinaH -- 2016-12-13
 - Worked on integrating front end with google directions api.
