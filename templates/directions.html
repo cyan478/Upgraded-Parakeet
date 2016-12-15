@@ -46,7 +46,7 @@
     <br>
     
     
-    <h1><center>Get directions to {{event}}:</center></h1>
+    <h1><center>Get directions to {{event.name}}:</center></h1>
 
     <div class="container">
       <div class="col-md-2"></div>
@@ -90,7 +90,7 @@
       <div class="row">
 	<div class = "col-md-4"></div>
 	<div class="col-md-4 colored-containers"><br> 
-	  <form action = "/getdirections/PLACEHOLDER" method = "POST"><!--ADD IN EVENT LOCATION HERE-->
+	  <form action = "/getdirections/{{event.id}}" method = "POST"><!--ADD IN EVENT LOCATION HERE-->
 	    <div class="form-group">
               <label for="start"><b>Start Location</b></label>
               <input type="text" class="form-control" placeholder="345 Chambers Street">

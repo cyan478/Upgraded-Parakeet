@@ -54,7 +54,7 @@ def event(id):
 @app.route("/directions/<id>/")
 def directions(id):
     info = tmEvents.eventInfo(id)
-    return render_template("directions.html", user = session['username'], event=id)
+    return render_template("directions.html", event = info)
 
 
 #======================================================== CREATING A HANGOUT EVENT (INIVITING)
@@ -83,9 +83,12 @@ def joinEvent(id):
     return redirect( url_for('home') )
 
 #==================getDirections=================
-@app.route("/getdirections/<destination>", methods=['POST'])
-def getDirections(destination):
-    return render_template("event.html",directions=[1,3,4])
+@app.route("/getdirections/<id>", methods=['POST'])
+def getDirections(id):
+    event =  tmEvents.eventInfo(id)
+    #out = directions.directions(event['streetAddr'],'345 Chambers Street', 'walking')
+    out='test'
+    return render_template("event.html",event=event,directions= out)
 
 #========================userProfile=======================
 @app.route("/user/<user>/")

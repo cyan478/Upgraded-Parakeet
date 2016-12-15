@@ -1,16 +1,19 @@
 import urllib2, json
 
 def getKey():
-    f = open('apikeys.txt','r').read()
+    f = open('../apikeys.txt','r').read()
     csv = f.split('\n')
     di = csv[2].split(',')
     return di[1]
 
-APIkey = getKey()
-url = "https://maps.googleapis.com/maps/api/directions/json?"
+
+
 query=""
 
-def directionsCall():
+def directionsCall(origin, destination, mode):
+  APIkey = getKey()
+  url = "https://maps.googleapis.com/maps/api/directions/json?"
+  query= "origin=%s" %(origin)
   u = urllib2.urlopen(url+query+APIkey)
   json_string = u.read()
   parsed_json = json.loads(json_string)
@@ -32,7 +35,10 @@ def mode(mode):
 def key():
   global query
   query += "&key="
-  
+
+def directions(origin, destination, mode):
+    directionsCall()
+
 origin("2128+East+28th+St+Brooklyn")
 destination("30+Rockefeller+Plaza+NY")
 mode("walking")
