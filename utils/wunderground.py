@@ -17,9 +17,11 @@ def wuCall(year, month, day):
 		return "The event is still too far away. Come back later, please!"
 	u = urllib2.urlopen(url+query)
 	json_string = u.read()
-	parsed_json = json.loads(json_string) 
-	location = parsed_json['location']['city']
-	retStr = "In %s, \n " % (location)
+	parsed_json = json.loads(json_string)
+	retStr = ""
+	if 'location' in parsed_json.keys():
+		location = parsed_json['location']['city']
+		retStr += "In %s, \n " % (location)
 	if (dayOfEvent - currDay == 0):
 		temp_f = parsed_json['current_observation']['temp_f']
 		weather = parsed_json['current_observation']['weather']
