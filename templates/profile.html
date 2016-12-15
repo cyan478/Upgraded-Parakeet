@@ -27,6 +27,10 @@
     [class*="col-"] {
       margin-bottom: 15px;
 }
+  .colored-containers{
+    background-color: #ee9d84;
+    border-radius: 5px;
+  }
     </style>
 
 
@@ -68,12 +72,23 @@
     <br><br> 
     <!-- =================================INFO, EVENTS, & FRIENDS-->
     <!-- ================================== need: {{add_or_del}} -->
+    <!-- ================================== need: {{email}} =====-->
     <!-- ======================================================= -->
-   <div class="container-fluid text-center">
+   <div class="container-fluid text-center colored-containers">
     <div class="row">
-    <div class="col-md-2"> Basic Info </div>
-    <div class="col-md-8"> Events attended </div>
-    <div class="col-md-2"> Friends </div>
+    <div class="col-md-2"> 
+        <div class = "text-center"><h4>Contact Info</h4><br>
+        {{email}}
+        </div>
+    </div>
+    <div class="col-md-8 colored-containers"> 
+        <div class = "text-center"><h4>Events Attended</h4><br>
+        </div>
+    </div>
+    <div class="col-md-2 colored-containers"> 
+        <div class = "text-center"><h4>Friends</h4><br>
+        </div>
+    </div>
   </div><!-- /row -->
   </div><!-- /container -->
 
