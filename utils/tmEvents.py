@@ -1,6 +1,7 @@
 import urllib2
 import json
 import userEvents
+import datetime
 
 def getKey():
     f = open('apikeys.txt','r').read()
@@ -9,6 +10,8 @@ def getKey():
     return tm[1]
 
 query = "&size=10&source=ticketmaster"
+moment = datetime.datetime.now()
+querysDT = "&startDateTime=%s-%s-%sT01:01:00Z"%(moment.year,moment.month,moment.day)
 queryAddons = ""
 apikey = getKey()
 url = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=%s"%(apikey)
@@ -24,10 +27,11 @@ returns dict with keys:
 'note' (offered by the event) if one exists
 """
 def tmCall(user):
-    global query, queryAddons
-    urlq = url+query+queryAddons
+    global query, queryAddons, querysDT
+    urlq = url+query+querysDT+queryAddons
     u = urllib2.urlopen(urlq)
     queryAddons = ""
+    querysDT = "&startDateTime=%s-%s-%sT01:01:00Z"%(moment.year,moment.month,moment.day)
     j = json.load(u)
     types = userEvents.getEventTypes(user)
     for type in types:
@@ -165,16 +169,10 @@ def tmClassType(type):
     queryAddons += "&classificationName=%s"%(type)
 
 def tmStartDT(y, m, d):
-    global queryAddons
+    global queryAddons, querysDT
     if (m<10):
         m = "0"+str(m)
     if (d<10):
         d = "0" + str(d)
     queryAddons += "&startDateTime=%s-%s-%sT01:01:00Z"%(y,m,d)
-
-#only events starting after 2017-01-03 01:01
-#tmStartDT(2017,01,03,01,01)
-#tmCity("Queens")
-#tmCode("11375")
-#tmStateCode("NY")
-#tmCall()
+    querysDT = ""
