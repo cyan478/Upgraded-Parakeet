@@ -1,4 +1,4 @@
-import tmEvents
+import tmEvents, notifs
 from sqlite3 import connect
 
 f = "data/hangout.db"
@@ -59,3 +59,6 @@ def listEvents(user):
                 events.append(info)
     print events
     return events
+    
+def inviteFriends(user, friend, event):
+  notifs.createNotif(friend, "%s has invited you to %s!" %(user, event))
