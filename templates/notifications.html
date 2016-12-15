@@ -30,23 +30,36 @@
       
       
   <h1><center>Notifications</center></h1>
-   <div class="container">
-  <div class="row">
+   <div class="container-fluid">
 
   <!-- ========================================================================--> 
   <!-- ======================================================= GENERATE NOTIFS -->
   <!-- ========================================================================--> 
-
       {% for notif in notifs %}
-        <div class="col-md-2"></div>
+        <div class="row">
+        <div class="col-md-2">
         <div class="col-md-8 colored-containers"><div class = "text-center"><h4>{{notif}}</h4></div>
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+        </div>
       {% endfor %}
 
-
-</div><!-- /row -->
 </div><!-- /container -->
 
+  <!-- ========================================================================--> 
+  <!-- ====================================================== GENERATE FRIENDS -->
+  <!-- ========================================================================-->
+
+    <h1><center>Recommended Friends</center></h1>
+   <div class="container-fluid">
+
+       {% for notif in notifs %}
+        <div class="row">
+        <div class="col-md-2">
+        <div class="col-md-8 colored-containers"><div class = "text-center"><h4>{{rfriends}}</h4></div>
+        <div class="col-md-2">
+        </div>
+      {% endfor %}
+</div><!-- /container -->
 
   </body>
   
