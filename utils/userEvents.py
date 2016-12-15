@@ -36,7 +36,7 @@ def getEventTypes(user):
     sel = c.execute(query, (user,))
     types = []
     for record in sel:
-        types = record[6].split("-")
+        types = record[5].split("-")
     db.commit()
     db.close()
     return types
@@ -48,7 +48,7 @@ def listEvents(user):
     sel = c.execute(query, (user,))
     events = []
     for record in sel:
-        userEvs = record[5].split("-")
+        userEvs = record[4].split("-")
         print "userEvs" + str(userEvs)
         for ev in userEvs:
             info = tmEvents.eventInfo(ev)
